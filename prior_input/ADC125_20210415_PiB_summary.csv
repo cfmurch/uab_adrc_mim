@@ -1,0 +1,63 @@
+Subject ID: 300001005JMPIB125x1,Subject ID#/MRN: ADC125,Analysis performed by: McConathy,Date analysis performed: 20220408,UDS3
+Date of amyloid PET study: 2021-04-15,null,null,Date of MRI study: 2021-04-15,
+IMAGING RESULT/PARAMETER,"RESULT
+","NACC ITEM ID
+",CONFIDENCE,STUDY INFORMATION
+Abnormally elevated amyloid on PET?,Yes,6a,Highly confident,2021-04-15; Dynamic PET Brain TOF MAC_50-70min_summed_frames_35-38
+FDG-PET pattern of AD?,null,6c,null,2021-04-15; Dynamic PET Brain TOF MAC_50-70min_summed_frames_35-38
+"Hippocampal atrophy (Duara 2-4 on right and/or left)?
+",No,6d,"Not applicable
+",2021-04-15; Sag T1 BRAVO Brain REG
+Right hippocampal atrophy (Duara 2-4)?,No,Not applicable,Not applicable,2021-04-15; Sag T1 BRAVO Brain REG
+"Right hippocampal atrophy Duara score (0-4)
+",1,"Not applicable
+","Not applicable
+",2021-04-15; Sag T1 BRAVO Brain REG
+Left hippocampal atrophy (Duara 2-4)?,No,Not applicable,Not applicable,2021-04-15; Sag T1 BRAVO Brain REG
+Left hippocampal atrophy Duara score (0-4),1,Not applicable,Not applicable,2021-04-15; Sag T1 BRAVO Brain REG
+Tau-PET evidence for AD?,null,6e,null,2021-04-15; Dynamic PET Brain TOF MAC_50-70min_summed_frames_35-38
+FDG-PET evidence of FTLD?,null,6g,null,2021-04-15; Dynamic PET Brain TOF MAC_50-70min_summed_frames_35-38
+Tau-PET evidence of FTLD?,null,6h,null,2021-04-15; Dynamic PET Brain TOF MAC_50-70min_summed_frames_35-38
+"Structural MRI evidence of FTLD?
+",No,6i,Moderately confident,2021-04-15; Sag T1 BRAVO Brain REG
+FDG-PET results?,null,Not applicable,null,2021-04-15; Dynamic PET Brain TOF MAC_50-70min_summed_frames_35-38
+Amyloid SUVR = (entire cerebral cortex activity)/(entire cerebellar activity) ,Mean cerebral cortical SUVR for amyloid: 1.96,,"Tauopathy summary score (entorhinal, lateral occipital, inferior temporal cortex + amygdala)
+",null
+=====================,=====================,=====================,=====================,=====================
+Patient ID: 300001005JMPIB125x1,Analysis performed by: McConathy,Date analysis performed: 20220408,,
+"IMAGING PARAMETER	",RESULT,NACC ITEM ID,LOCATION,STUDY INFORMATION
+Large vessel infarct(s)?,No,7a,null,2021-04-15; Sag T2 FLAIR Cube Brain Regional
+Lacunar infarct(s)?,No,7b,null,2021-04-15; Sag T2 FLAIR Cube Brain Regional
+"Macrohemorrhage(s)?
+",No,7c,null,2021-04-15Ax SWAN Brain Regional
+Microhemorrage(s)?,No,7d,null,2021-04-15Ax SWAN Brain Regional
+"Moderate white matter hyperintensities?
+(CHS 5-6)",No,7e,Not applicable,2021-04-15; Sag T2 FLAIR Cube Brain Regional
+"Extensive white matter hyperintensities?
+(CHS 7 or 8)",No,7f,Not applicable,2021-04-15; Sag T2 FLAIR Cube Brain Regional
+"CHS score (1-8)
+",1,Not applicable,Not applicable,2021-04-15; Sag T2 FLAIR Cube Brain Regional
+Fazekas score for periventricular white matter,1,Not applicable,Not applicable,2021-04-15; Sag T2 FLAIR Cube Brain Regional
+Fazekas score for deep white matter,0,Not applicable,Not applicable,2021-04-15; Sag T2 FLAIR Cube Brain Regional
+=======================,=======================,=======================,,
+Subject ID: 300001005JMPIB125x1,Series name for volumes: Sag T1 BRAVO Brain REG,Date of acquisition: 2021-04-15,,
+REGION,Volume (mL),Region volume as percent of entire brain,,
+Entire brain,982.98865,NA,,
+Entire cerebellum,145.84616,14.83701376,,
+Entire cerebral cortex,373.78375,38.02523594,,
+Left caudate,2.9068334,0.295713833,,
+Right caudate,3.5459898,0.360735575,,
+Left frontal cortex,68.999245,7.019332814,,
+Right frontal cortex,70.1402,7.135402625,,
+Left hippocampus,4.369206,0.444481832,,
+Right hippocampus,4.19042,0.42629385,,
+Left lateral ventricle,32.643444,3.320836324,,
+Right lateral ventricle,26.916204,2.738200947,,
+Left occipital cortex,17.846428,1.815527368,,
+Right occipital cortex,20.504753,2.085960318,,
+Left parietal cortex,38.995667,3.967051563,,
+Right parietal cortex,35.527916,3.614275307,,
+Left putamen,3.7265885,0.379107988,,
+Right putamen,3.7693894,0.383462149,,
+Left temporal cortex,43.802937,4.456097908,,
+Right temporal cortex,41.0528,4.176324857,,

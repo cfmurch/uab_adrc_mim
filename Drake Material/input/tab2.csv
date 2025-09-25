@@ -1,0 +1,15 @@
+"Patient ID: Practice BLAzER segmentation PiB","Analysis performed by: Jon McConathy","Date analysis performed: 20201124","",""
+"IMAGING PARAMETER	","RESULT","NACC ITEM ID","LOCATION","STUDY INFORMATION"
+"Large vessel infarct(s)?","Yes","7a","Left occipital","2018-06-07; Sag T2 FLAIR Cube Brain Regional"
+"Lacunar infarct(s)?","Yes","7b","right caudate, left centrum semiovale","2018-06-07; Sag T2 FLAIR Cube Brain Regional"
+"Macrohemorrhage(s)?
+","No","7c","null","2018-06-07Ax SWAN Brain Regional"
+"Microhemorrage(s)?","No","7d","null","2018-06-07Ax SWAN Brain Regional"
+"Moderate white matter hyperintensities?
+(CHS 5-6)","Yes","7e","Not applicable","2018-06-07; Sag T2 FLAIR Cube Brain Regional"
+"Extensive white matter hyperintensities?
+(CHS 7 or 8)","No","7f","Not applicable","2018-06-07; Sag T2 FLAIR Cube Brain Regional"
+"CHS score (1-8)
+","5","Not applicable","Not applicable","2018-06-07; Sag T2 FLAIR Cube Brain Regional"
+"Fazekas score for periventricular white matter","2.0","Not applicable","Not applicable","2018-06-07; Sag T2 FLAIR Cube Brain Regional"
+"Fazekas score for deep white matter","1.0","Not applicable","Not applicable","2018-06-07; Sag T2 FLAIR Cube Brain Regional"

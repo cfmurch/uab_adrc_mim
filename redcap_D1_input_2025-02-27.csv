@@ -1,0 +1,3 @@
+record_id,redcap_event_name,redcap_repeat_instance,amylpet,amylcsf,fdgad,hippatr,taupetad,csftau,fdgftld,tpetftld,mrftld,datscan,othbiom,othbiomx,imaglinf,imaglac,imagmach,imagmich,imagmwmh,imagewmh
+1,visit_info_arm_1,1,0,8,8,1,0,8,8,0,0,8,0,,0,0,0,0,0,0
+195,visit_info_arm_1,1,1,8,8,0,8,8,8,8,0,8,0,,0,0,0,0,0,0

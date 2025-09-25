@@ -1,0 +1,57 @@
+Subject ID: 300001005JMPIBADC319X1,Subject ID#/MRN: 300001005JMPIBADC319X1,Analysis performed by: McConathy,Date analysis performed: 20250226,
+Date of amyloid PET study: 2024-04-30,null,null,Date of MRI study: 2024-04-30,
+IMAGING RESULT/PARAMETER,"RESULT
+","NACC ITEM ID
+",CONFIDENCE,STUDY INFORMATION
+Abnormally elevated amyloid on PET?,No,6a,Moderately confident,2024-04-30; e+1 DYNAMIC PET BRAIN MAC TOF REG_50-70min_frames_35-38
+FDG-PET pattern of AD?,null,6c,null,2024-04-30; e+1 DYNAMIC PET BRAIN MAC TOF REG_50-70min_frames_35-38
+Hippocampal atrophy (Duara 2-4 on right and/or left)?,Yes,6d,Not applicable,2024-04-30; SAG 3D FSPGR
+Right hippocampal atrophy (Duara 2-4)?,Yes,Not applicable,Not applicable,2024-04-30; SAG 3D FSPGR
+"Right hippocampal atrophy Duara score (0-4)
+",2,"Not applicable
+",Not applicable,2024-04-30; SAG 3D FSPGR
+Left hippocampal atrophy (Duara 2-4)?,Yes,Not applicable,Not applicable,2024-04-30; SAG 3D FSPGR
+Left hippocampal atrophy Duara score (0-4),2,Not applicable,Not applicable,2024-04-30; SAG 3D FSPGR
+Tau-PET evidence for AD?,null,6e,null,2024-04-30; e+1 DYNAMIC PET BRAIN MAC TOF REG_50-70min_frames_35-38
+FDG-PET evidence of FTLD?,null,6g,null,2024-04-30; e+1 DYNAMIC PET BRAIN MAC TOF REG_50-70min_frames_35-38
+Tau-PET evidence of FTLD?,null,6h,null,2024-04-30; e+1 DYNAMIC PET BRAIN MAC TOF REG_50-70min_frames_35-38
+Structural MRI evidence of FTLD?,No,6i,Moderately confident,2024-04-30; SAG 3D FSPGR
+FDG-PET results?,null,Not applicable,null,2024-04-30; e+1 DYNAMIC PET BRAIN MAC TOF REG_50-70min_frames_35-38
+Amyloid SUVR = (entire cerebral cortex activity)/(entire cerebellar activity) ,Mean cerebral cortical SUVR for amyloid: 0.95,,"Tauopathy summary score (entorhinal, lateral occipital, inferior temporal cortex + amygdala)
+",null
+=====================,=====================,=====================,=====================,=====================
+Subject ID: 300001005JMPIBADC319X1,Analysis performed by: McConathy,Date analysis performed: 20250226,,
+"IMAGING PARAMETER	",RESULT,NACC ITEM ID,LOCATION,STUDY INFORMATION
+Large vessel infarct(s)?,No,7a,null,2024-04-30; SAG 3D T2 FLAIR_DEFACE
+Lacunar infarct(s)?,No,7b,null,2024-04-30; SAG 3D T2 FLAIR_DEFACE
+Macrohemorrhage(s)?,No,7c,null,2024-04-30; 3D Ax SWAN
+Microhemorrage(s)?,Yes,7d,"Right occipital lobe, pons, left thalamus, left centrum semiovale",2024-04-30; 3D Ax SWAN
+"Moderate white matter hyperintensities?
+(CHS 5-6)",No,7e,Not applicable,2024-04-30; SAG 3D T2 FLAIR_DEFACE
+"Extensive white matter hyperintensities?
+(CHS 7 or 8)",Yes,7f,Not applicable,2024-04-30; SAG 3D T2 FLAIR_DEFACE
+CHS score (1-8),7,Not applicable,Not applicable,2024-04-30; SAG 3D T2 FLAIR_DEFACE
+Fazekas score for periventricular white matter,2,Not applicable,Not applicable,2024-04-30; SAG 3D T2 FLAIR_DEFACE
+Fazekas score for deep white matter,3,Not applicable,Not applicable,2024-04-30; SAG 3D T2 FLAIR_DEFACE
+=======================,=======================,=======================,,
+Subject ID: 300001005JMPIBADC319X1,Series name for volumes: SAG 3D FSPGR,Date of acquisition: 2024-04-30,,
+REGION,Volume (mL),Region volume as percent of entire brain,,
+Entire brain,1251.4357,NA,,
+Entire cerebellum,144.45694,11.54329729,,
+Entire cerebral cortex,478.76926,38.25760033,,
+Left caudate,4.6989374,0.375483737,,
+Right caudate,5.312125,0.424482483,,
+Left frontal cortex,89.504814,7.152170612,,
+Right frontal cortex,88.83263,7.09845728,,
+Left hippocampus,4.028875,0.32194023,,
+Right hippocampus,4.6375,0.370574367,,
+Left lateral ventricle,37.621063,3.006232295,,
+Right lateral ventricle,23.6075,1.886433371,,
+Left occipital cortex,21.914625,1.751158746,,
+Right occipital cortex,26.172375,2.091387945,,
+Left parietal cortex,51.421124,4.108970583,,
+Right parietal cortex,49.683937,3.970155103,,
+Left putamen,5.243625,0.419008767,,
+Right putamen,5.101875,0.407681749,,
+Left temporal cortex,52.21675,4.17254777,,
+Right temporal cortex,53.01575,4.236394423,,
