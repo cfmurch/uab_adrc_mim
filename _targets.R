@@ -3,6 +3,7 @@ library(tarchetypes)
 
 # Set target-specific options such as packages.
 tar_option_set(packages = c("ADRCDash", "naccDataDict"))
+#tar_option_set(packages = c("ADRCDash"))
 
 
 #Source /R
@@ -73,33 +74,30 @@ targets <- list(
   #This is a generalized step that can be applied for either NACC data or UAB specific instruments
   tar_target(
     uds_output,
-    merge_to_csv(nacc_d1_merge, redcap_match[["nacc"]], csv_string = "redcap_D1_input_", .type = "nacc",
+    merge_to_csv(nacc_d1_merge$UDS4, redcap_match[["nacc"]], csv_string = "redcap_D1_input_", .type = "nacc",
                  mim_dict = uds_questions, form_map = uds_form_map,
-                 .mim_backup = nacc_d1_single_row)
-  ),
-
-
-
-  #Also prep the full dataset to the upload for to the generalized imaging instrument
-  tar_target(
-    imaging_dat,
-    process_csv(data_list, entry_form = "Imaging")
-  ),
-
-  #Do the same type of merge and CSV output
-  tar_target(
-    imaging_merge,
-    merge_nacc_rows(imaging_dat, mim_dict = mim_to_redcap_dict)
-  ),
-
-  tar_target(
-    imaging_output,
-    merge_to_csv(imaging_merge, redcap_match[["imaging"]], csv_string = "redcap_mim_input_", .type = "image",
-                 mim_dict = mim_to_redcap_dict, form_map = uab_imaging_map)
+                 .mim_backup = nacc_d1_single_row$UDS4)
   )
 
 
 
+  # #Also prep the full dataset to the upload for to the generalized imaging instrument
+  # tar_target(
+  #   imaging_dat,
+  #   process_csv(data_list, entry_form = "Imaging")
+  # ),
+  #
+  # #Do the same type of merge and CSV output
+  # tar_target(
+  #   imaging_merge,
+  #   merge_nacc_rows(imaging_dat, mim_dict = mim_to_redcap_dict)
+  # ),
+  #
+  # tar_target(
+  #   imaging_output,
+  #   merge_to_csv(imaging_merge, redcap_match[["imaging"]], csv_string = "redcap_mim_input_", .type = "image",
+  #                mim_dict = mim_to_redcap_dict, form_map = uab_imaging_map)
+  # )
 
 )
 
