@@ -24,8 +24,8 @@ process_csv <- function(.data_list, entry_form, dict = processing_table_dict){
       header_curr <- header_curr[,-cols_to_drop]
     }
 
-    #Default to UDS3
-    if("uds_version" %not_in% colnames(header_curr)) header_curr$uds_version <- "UDS3"
+    # Force new-form processing to UDS4
+    header_curr$uds_version <- "UDS4"
 
     #Next step through the tables and extract the relevant columns
     table_processed <- lapply(.mim$tables, function(.table){
@@ -33,6 +33,7 @@ process_csv <- function(.data_list, entry_form, dict = processing_table_dict){
       #Step 1 - Get the relevant columns, return NULL if there's no column match (e.g. volumes when processing for D1)
       table_curr <- .table[,colnames(.table) %in% dict[[entry_form]][["table_cols"]]]
       if(ncol(table_curr) == 0) return(NULL)
+      if(nrow(table_curr) == 0) return(NULL)
 
       #Step 2 check if the column with the names is going to be annotated by the type of PET
       if(!is.na(dict[[entry_form]][["annotate_pet_cols"]])){
@@ -45,6 +46,7 @@ process_csv <- function(.data_list, entry_form, dict = processing_table_dict){
           dict[[entry_form]][["var_with_col_names"]][which(dict[[entry_form]][["var_with_col_names"]] %in% colnames(.table))]
 
         #Then we annotate them together, this works even with PET specific entries like PIB since they get dropped in the next steps if they have a drop_val
+        if(nrow(table_curr) == 0) return(NULL)
         table_curr[[col_with_var_names]] <- paste0(table_curr[[col_with_var_names]], "_", annotate_curr)
       }
 
@@ -60,6 +62,7 @@ process_csv <- function(.data_list, entry_form, dict = processing_table_dict){
           table_curr <- table_curr[!is.na(table_curr[[.col]]) & table_curr[[.col]] %not_in% .drop,]
         }
       }
+      if(nrow(table_curr) == 0) return(NULL)
 
       #Before we continue processing, we extract and reduction columns we may have
       #For now this is going to be the "STUDY INFORMATION" columns
@@ -128,7 +131,9 @@ process_csv <- function(.data_list, entry_form, dict = processing_table_dict){
         #With the variable column identified, reduce the columns to those being used and pivot_longer
         data_cols <- dict[[entry_form]][["var_with_data"]][dict[[entry_form]][["var_with_data"]] %in% colnames(table_curr)]
         table_curr <- table_curr[,colnames(table_curr) %in% c("variable", data_cols)]
+        if(nrow(table_curr) == 0) return(NULL)
         table_curr <- as.data.frame(tidyr::pivot_longer(table_curr, tidyselect::all_of(data_cols)))
+        if(nrow(table_curr) == 0) return(NULL)
         table_curr$variable <- paste0(table_curr$variable, "_", table_curr$name)
         table_curr <- table_curr[,colnames(table_curr) %in% c("variable", "value")]
       }
@@ -136,14 +141,35 @@ process_csv <- function(.data_list, entry_form, dict = processing_table_dict){
 
       #Make sure the two column table is appropriately renamed if it didn't go through the previous steps
       if("variable" %not_in% colnames(table_curr) && "value" %not_in% colnames(table_curr)){
-        colnames(table_curr)[colnames(table_curr) == dict[[entry_form]][["var_with_col_names"]]] <- "variable"
-        colnames(table_curr)[colnames(table_curr) == dict[[entry_form]][["var_with_data"]]] <- "value"
+        # Identify actual present columns among candidates
+        present_name_col <- dict[[entry_form]][["var_with_col_names"]][dict[[entry_form]][["var_with_col_names"]] %in% colnames(table_curr)]
+        present_value_col <- dict[[entry_form]][["var_with_data"]][dict[[entry_form]][["var_with_data"]] %in% colnames(table_curr)]
+        if(length(present_name_col) == 0 || length(present_value_col) == 0){
+          return(NULL)
+        }
+        # If multiple, choose the first as variable source; keep both for values via pivot step above
+        colnames(table_curr)[colnames(table_curr) == present_name_col[1]] <- "variable"
+        # If multiple value columns and we didn't pivot (2-col table), choose the first as value
+        if(length(present_value_col) > 1){
+          colnames(table_curr)[colnames(table_curr) == present_value_col[1]] <- "value"
+          # Drop any other value columns in 2-col mode
+          table_curr <- table_curr[,colnames(table_curr) %in% c("variable","value")]
+        } else {
+          colnames(table_curr)[colnames(table_curr) == present_value_col] <- "value"
+        }
       }
+      if(nrow(table_curr) == 0) return(NULL)
 
 
       #Finally, add the reduced column data frame if it exists
       if(exists("expand_col")){
-        table_curr <- rbind.data.frame(table_curr, expand_col)
+        if(nrow(table_curr) == 0){
+          table_curr <- expand_col
+        } else if(nrow(expand_col) == 0){
+          table_curr <- table_curr
+        } else{
+          table_curr <- rbind.data.frame(table_curr, expand_col)
+        }
       }
 
       return(table_curr)

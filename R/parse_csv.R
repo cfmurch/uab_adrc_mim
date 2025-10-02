@@ -72,8 +72,12 @@ parse_csv <- function(input_files, csv_table_split = "==", csv_dict = csv_list_d
             header_curr <- header_curr[, colSums(is.na(header_curr)) != nrow(header_curr)]
             header_curr <- header_name_parser(header_curr, dict = parsing_dict[["header"]])
 
-            if(is.null(header_out)){ header_out <- header_curr
-            } else header_out <- cbind.data.frame(header_out, header_curr)
+            # If the current header row does not yield any parsed fields (new-form rows),
+            # skip binding to avoid differing number of rows during cbind.
+            if(!is.null(header_curr) && nrow(header_curr) > 0){
+              if(is.null(header_out)){ header_out <- header_curr
+              } else header_out <- cbind.data.frame(header_out, header_curr)
+            }
             .tab <- .tab[-1,]
           }
         }
@@ -104,8 +108,22 @@ parse_csv <- function(input_files, csv_table_split = "==", csv_dict = csv_list_d
           tail_curr <- lapply(tail_check, function(.tail){
             header_name_parser(.tab[.tail,], dict = parsing_dict[["tail"]])
           })
-          tail_curr <- do.call(cbind.data.frame, tail_curr)
-          header_out <- cbind.data.frame(header_out, tail_curr)
+          # Drop NULLs and zero-row frames
+          tail_curr <- purrr::compact(tail_curr)
+          if(length(tail_curr) > 0){
+            tail_curr <- tail_curr[sapply(tail_curr, function(tt) is.data.frame(tt) && nrow(tt) >= 1)]
+          }
+          if(length(tail_curr) > 0){
+            # Ensure single-row per component
+            tail_curr <- lapply(tail_curr, function(tt){ if(nrow(tt) > 1) tt[1,,drop=FALSE] else tt })
+            tail_curr <- do.call(cbind.data.frame, tail_curr)
+            # Only bind tail rows if we have an initialized header_out; otherwise start it
+            if(is.null(header_out)){
+              header_out <- tail_curr
+            } else {
+              header_out <- cbind.data.frame(header_out, tail_curr)
+            }
+          }
           .tab <- .tab[-tail_check,]
         }
 
@@ -115,9 +133,24 @@ parse_csv <- function(input_files, csv_table_split = "==", csv_dict = csv_list_d
 
       })
 
-      #With the tables fully processed, let's take the full selection of header data to a single row and add the file data
-      header_out <- do.call(cbind.data.frame, lapply(csv_list, function(.csv){.csv[["header"]]}))
-      header_out <- cbind.data.frame(file_data, header_out)
+      #With the tables fully processed, take the full selection of header data to a single row and add the file data
+      headers_list <- lapply(csv_list, function(.csv){.csv[["header"]]})
+      # Drop NULLs and zero-row frames to prevent row count mismatches
+      headers_list <- purrr::compact(headers_list)
+      if(length(headers_list) > 0){
+        # Drop any zero-row header frames
+        headers_list <- headers_list[sapply(headers_list, function(hh) is.data.frame(hh) && nrow(hh) >= 1)]
+      }
+      if(length(headers_list) > 0){
+        headers_list <- lapply(headers_list, function(hh){ if(nrow(hh) > 1) hh[1,,drop=FALSE] else hh })
+        header_out <- cbind.data.frame(file_data, do.call(cbind.data.frame, headers_list))
+      } else {
+        # If no headers parsed, just use file_data as the header row
+        header_out <- file_data
+      }
+
+      # Force new forms to UDS4
+      header_out$uds_version <- "UDS4"
 
 
       #At this point we've returned a list with each processed table from MIM along with an associated header

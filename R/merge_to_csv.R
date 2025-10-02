@@ -52,6 +52,10 @@ merge_to_csv <- function(.mim, .redcap, csv_string,
 
       #Bind the list and name the columns
       uds_fill <- do.call(cbind.data.frame, uds_fill)
+      # Ensure uds_fill is a data frame with proper dimensions before assigning colnames
+      if(is.null(dim(uds_fill)) || length(dim(uds_fill)) < 2) {
+        uds_fill <- as.data.frame(uds_fill)
+      }
       colnames(uds_fill) <- missing_uds
 
       #Bind the .mim and missing_uds dataframe together and reorder (we do this as a data frame instead of data.table)
@@ -60,7 +64,10 @@ merge_to_csv <- function(.mim, .redcap, csv_string,
         .mim[,match(mim_dict[[.form_ver]][["quest_id"]], colnames(.mim))]
 
       #For some reason, the columns are reordered but the names aren't, we just add that as an additional step  - make sure the output is still a data.table for the merge in the next step
-      colnames(.mim)[colnames(.mim) %in% mim_dict[[.form_ver]][["quest_id"]]] <- mim_dict[[.form_ver]][["quest_id"]]
+      # Ensure .mim is a proper data frame before assigning colnames
+      if(is.data.frame(.mim) && ncol(.mim) > 0) {
+        colnames(.mim)[colnames(.mim) %in% mim_dict[[.form_ver]][["quest_id"]]] <- mim_dict[[.form_ver]][["quest_id"]]
+      }
       .mim <- data.table::as.data.table(.mim)
 
     }
@@ -88,12 +95,20 @@ merge_to_csv <- function(.mim, .redcap, csv_string,
 
   #With each form version processed, we can now bind out the data.frame
   redcap_out <- do.call(plyr::rbind.fill, uds_redcap_list)
+  
+  # Ensure redcap_out is a proper data frame before proceeding
+  if(is.null(redcap_out) || nrow(redcap_out) == 0) {
+    return(data.frame())
+  }
+  
   redcap_out[is.na(redcap_out)] <- ""
 
   #Final step is to remap column name like nacc_record back to the redcap expected output
   for(.idx in seq_along(remap_dict[[.type]])){
-    colnames(redcap_out)[which(colnames(redcap_out) == remap_dict[[.type]][[.idx]])] <-
-      names(remap_dict[[.type]])[[.idx]]
+    if(length(remap_dict[[.type]]) > 0 && .idx <= length(remap_dict[[.type]])) {
+      colnames(redcap_out)[which(colnames(redcap_out) == remap_dict[[.type]][[.idx]])] <-
+        names(remap_dict[[.type]])[[.idx]]
+    }
   }
 
 
