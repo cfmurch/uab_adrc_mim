@@ -74,7 +74,7 @@ targets <- list(
   #This is a generalized step that can be applied for either NACC data or UAB specific instruments
   tar_target(
     uds_output,
-    merge_to_csv(nacc_d1_merge$UDS4, redcap_match[["nacc"]], csv_string = "redcap_D1_input_", .type = "nacc",
+    merge_to_csv(nacc_d1_merge, redcap_match[["nacc"]], csv_string = "redcap_D1_input_", .type = "nacc",
                  mim_dict = uds_questions, form_map = uds_form_map,
                  .mim_backup = nacc_d1_single_row$UDS4)
   )

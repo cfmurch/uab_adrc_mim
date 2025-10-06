@@ -221,6 +221,11 @@ uds_questions <-
          list(
            # Updated NACC item codes for new forms
            quest_num = c(
+             # # PET section
+             # "6a1", "6a2", "6b", "6b1", "6b2", "6b3", "64b", "6d",
+             # # MRI/PET details carried forward to keep merge_nacc_rows behavior coherent
+             # "7a1", "7a2", "7a3", "7a3a", "7a3b", "7a3c", "7a3d", "7a3e", "7a3e1"
+
              # PET section
              "6a1", "6a2", "6b", "6b1", "6b2", "6b3", "64b", "6d",
              # MRI/PET details carried forward to keep merge_nacc_rows behavior coherent
@@ -228,6 +233,8 @@ uds_questions <-
            ),
            quest_id = c(
              # Map to REDCap fields; adapt as available in your REDCap project
+             # "amylpet", "taupetad", "fdgad", "fdgad_ad", "fdgftld", "fdgdlb", "fdgothx", "hippatr",
+             # "mr_ad", "mr_ftld", "mr_cvd", "imaglinf", "imaglac", "imagmach", "imagmich", "imagmwmh", "imagewmh"
              "amylpet", "taupetad", "fdgad", "fdgad_ad", "fdgftld", "fdgdlb", "fdgothx", "hippatr",
              "mr_ad", "mr_ftld", "mr_cvd", "imaglinf", "imaglac", "imagmach", "imagmich", "imagmwmh", "imagewmh"
            ),
@@ -243,16 +250,19 @@ uds_questions <-
            # Updated NACC item codes for new forms
            quest_num = c(
              # PET section
-             "6a1", "6a2", "6b", "6b1", "6b2", "6b3", "64b", "6d",
+             "6a1", "6a2", "6b", "6b1", "6b2", "6b3", "6b4", "6b4a",
+             # Other tracer values  we never actually use
+             "6c", "6d", "6d1a",
              # MRI/PET details carried forward to keep merge_nacc_rows behavior coherent
              "7a1", "7a2", "7a3", "7a3a", "7a3b", "7a3c", "7a3d", "7a3e", "7a3e1"
            ),
            quest_id = c(
              # Map to REDCap fields; adapt as available in your REDCap project
-             "amylpet", "taupetad", "fdgad", "fdgad_ad", "fdgftld", "fdgdlb", "fdgothx", "hippatr",
-             "mr_ad", "mr_ftld", "mr_cvd", "imaglinf", "imaglac", "imagmach", "imagmich", "imagmwmh", "imagewmh"
+             "amylpet", "taupet", "fdgpetdx", "fdgad", "fdgftld", "fdglbd", "fdgoth", "fdgothx",
+             "datscandx", "tracothdx", "tracothdxx",
+             "structad", "structftld", "structcvd", "imaglinf", "imaglac", "imagmach", "imagmich", "imagmwmh", "imagewmh"
            ),
-              default_response = c(rep(8,10), 0, "", rep(8, 6)),
+              default_response = c(rep(8,7), "", rep(0, 2), "", rep(8, 9)),
               uds_recode = c(8),
               uds_null = c("null"),
               uds_ver_col = c("form_ver_num" = "uds_version"),
