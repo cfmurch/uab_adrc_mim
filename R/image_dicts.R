@@ -36,7 +36,8 @@ parsing_dict <- list(file_name = list(col_names = c("adc_sub_id", "PET", "Image_
                                    gsub_string = c(".*?MRN: (ADC\\d*)_.*", ".*?Subject ID: (.*?)_.*", ".*?Subject ID: .*?((x|X)\\d*)_.*", ".*?(UDS\\d*)_.*",
                                                    ".*?Date analysis performed: (\\d*)_.*",
                                                    ".*?Analysis performed by: (.*?)_.*", ".*?Date of acquisition: (.*?)_.*",
-                                                   ".*?Date of tau.*?: (.*?)_.*", ".*?Date of amyloid.*?: (.*?)_.*", ".*?Date of MRI.*?: (.*?)_.*"),
+                                                   #".*?Date of tau.*?: (.*?)_.*", ".*?Date of amyloid.*?: (.*?)_.*", ".*?Date of MRI.*?: (.*?)_.*"),
+                                                   "null.*?PET BRAIN MAC.*? \\- (.*?)_.*?null.*", ".*?PET BRAIN MAC.*? \\- (.*?)_.*?null.*?_.*?null.*", ".*?Date of MRI.*? \\- (.*?)"),
                                    date_string = c(NA, NA, NA, NA, "lubridate::ymd", NA, "lubridate::ymd", "lubridate::ymd", "lubridate::ymd", "lubridate::ymd")),
 
                      tail = list(row_ident = "^(Amyloid SUVR|Tauopathy summary score|Centiloid value \\(CL\\)|SUVR for CL|Centiloid equation)",

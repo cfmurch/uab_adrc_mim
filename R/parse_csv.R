@@ -179,7 +179,7 @@ header_name_parser <- function(.dat, dict, df_collapse = TRUE){
 
   #Step through the dictionary, extract the relevant portions
   parse_out <- lapply(seq_along(dict$col_names), function(.idx){
-    .out <- gsub(dict[["gsub_string"]][.idx], "\\1", .dat, ignore.case = TRUE)
+    .out <- gsub(dict[["gsub_string"]][.idx], "\\1", .dat, ignore.case = TRUE, perl = TRUE)
 
     #If no match is made (wherein gsub returns the original string), return null
     if(.out == .dat) return(NULL)

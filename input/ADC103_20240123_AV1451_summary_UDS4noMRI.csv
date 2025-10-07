@@ -1,0 +1,61 @@
+"Subject ID: 300002780JMAV1451103X1","Subject ID#/MRN: 300002780JMAV1451103X1","Analysis performed by: McConathy","Date analysis performed: 20250416",""
+"null","6 Ph PET BRAIN MAC TOF REG_80-100min_frames_2-5 - 20240123","null","300002780JMAV1451103X1 - 20240123",""
+"IMAGING RESULT/PARAMETER","RESULT
+","NACC ITEM ID
+","CONFIDENCE","STUDY INFORMATION"
+"Elevated amyloid on PET?","null","6a1","null","null"
+"Centiloid value (CL)","null","","SUVR for CL calculation","null"
+"Centiloid equation","null","","Amyloid SUVR = (entire cerebral cortex activity)/
+(entire cerebellar activity) ","null"
+"Elevated tau on PET?","No","6a2","Highly confident","6 Ph PET BRAIN MAC TOF REG_80-100min_frames_2-5 - 20240123"
+"Tauopathy summary score 
+- entorhinal
+- lateral occipital
+- inferior temporal cortex
+- amygdala","Taupathy summary score: 1.09","","",""
+"Abnormal FDG PET?","null","6b","null","null"
+"FDG consistent with AD?","null","6b1","","null"
+"FDG consistent with FTLD?","null","6b2","","null"
+"FDG consistent with DLB?","null","6b3","","null"
+"FDG consistent with other etiology?","null","64b","","null"
+"FDG other etiology (if applicable):","null","64b","","null"
+"=====================","=====================","=====================","=====================","====================="
+"Subject ID: 300002780JMAV1451103X1","Subject ID#/MRN: 300002780JMAV1451103X1","Analysis performed by: McConathy","Date analysis performed: 20250416",""
+"null","6 Ph PET BRAIN MAC TOF REG_80-100min_frames_2-5 - 20240123","null","300002780JMAV1451103X1 - 20240123",""
+"IMAGING RESULT/PARAMETER","RESULT
+","NACC ITEM ID
+","CONFIDENCE","STUDY INFORMATION"
+"Atrophy on MR consistent with AD?","null","7a1","null","300002780JMAV1451103X1 - 20240123"
+"Atrophy on MR consistent with FTLD?","null","7a2","null","300002780JMAV1451103X1 - 20240123"
+"Hippocampal atrophy (Duara 2-4 on right and/or left)?","null","6d","Not applicable","300002780JMAV1451103X1 - 20240123"
+"Right hippocampal atrophy (Duara 2-4)?","NA","Not applicable","Not applicable","300002780JMAV1451103X1 - 20240123"
+"Right hippocampal atrophy Duara score (0-4)
+","null","Not applicable
+","Not applicable","300002780JMAV1451103X1 - 20240123"
+"Left hippocampal atrophy (Duara 2-4)?","NA","Not applicable","Not applicable","300002780JMAV1451103X1 - 20240123"
+"Left hippocampal atrophy Duara score (0-4)","null","Not applicable","Not applicable","300002780JMAV1451103X1 - 20240123"
+"=====================","=====================","=====================","=====================","====================="
+"=======================","=======================","=======================","",""
+"Subject ID: 300002780JMAV1451103X1","Series name for volumes: Sag T1 BRAVO Brain Regional","Date of acquisition: 2024-01-23","",""
+"REGION","Volume (mL)","Region volume as percent of entire brain","",""
+"Entire brain","1169.4354","NA","",""
+"Entire cerebellum","147.40814","12.605068989975486","",""
+"Entire cerebral cortex","492.5983","42.12274458860451","",""
+"Left caudate","2.9458666","0.2519050237656204","",""
+"Right caudate","2.9174373","0.2494739985728102","",""
+"Left frontal cortex","84.556625","7.230551048197733","",""
+"Right frontal cortex","82.86209","7.085649135204903","",""
+"Left hippocampus","4.2027445","0.35938234765290034","",""
+"Right hippocampus","4.367711","0.3734888626218226","",""
+"Left lateral ventricle","17.06394","1.4591605219302894","",""
+"Right lateral ventricle","10.412162","0.8903579972212987","",""
+"Left occipital cortex","21.341465","1.824937447905875","",""
+"Right occipital cortex","23.369152","1.9983277035578755","",""
+"Left parietal cortex","58.597904","5.0107857999178504","",""
+"Right parietal cortex","61.635635","5.270546288288693","",""
+"Left putamen","4.283326","0.3662729944838291","",""
+"Right putamen","4.7154365","0.4032233296999013","",""
+"Left temporal cortex","60.202316","5.147981240112881","",""
+"Right temporal cortex","57.878086","4.949233182307126","",""
+"","","","",""
+"Suggested file name for CSV summary report<BR>ADC###_YYYYMMDD_PETagent_summary","ADCnull_20240123_AV1451103X1_summary","","",""
