@@ -92,7 +92,7 @@ process_csv <- function(.data_list, entry_form, dict = processing_table_dict){
           grep_check <- grep(dict[[entry_form]][["reduction_vars"]][["expand"]][[.idx]], reduc_col$value)
           if(length(grep_check) > 0){
             #Extract it using the gsub string in the expand entry of the dictionary
-            .match <- gsub(dict[[entry_form]][["reduction_vars"]][["expand"]][.idx], "\\1", reduc_col$value, match, ignore.case = TRUE)
+            .match <- gsub(dict[[entry_form]][["reduction_vars"]][["expand"]][.idx], "\\1", reduc_col$value, ignore.case = TRUE)
             #Or return blank
           } else .match <- NA
           return(.match)
