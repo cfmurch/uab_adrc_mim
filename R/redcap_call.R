@@ -222,37 +222,76 @@ uds_questions <-
            # Updated NACC item codes for new forms
            quest_num = c(
              # PET section
-             "6a1", "6a2", "6b", "6b1", "6b2", "6b3", "64b", "6d",
-             # MRI/PET details carried forward to keep merge_nacc_rows behavior coherent
-             "7a1", "7a2", "7a3", "7a3a", "7a3b", "7a3c", "7a3d", "7a3e", "7a3e1"
+             "6a", "6b", "6c", "6d", "6e", "6f", "6g", "6h", "6i", "6j",
+             # Original MRI/PET
+             "7a", "7b", "7c", "7d", "7e", "7f",
+             # Genetics for UDS3
+             "8", "9", "10", "10a"
            ),
            quest_id = c(
              # Map to REDCap fields; adapt as available in your REDCap project
-             "amylpet", "taupetad", "fdgad", "fdgad_ad", "fdgftld", "fdgdlb", "fdgothx", "hippatr",
-             "mr_ad", "mr_ftld", "mr_cvd", "imaglinf", "imaglac", "imagmach", "imagmich", "imagmwmh", "imagewmh"
+             "amylpet", "amylcsf", "fdgad", "hippatr", "taupetad", "csftau", "fdgftld", "tpetftld", "mrftld", "datscan", "othbiom", "othbiomx",
+             "imaglinf", "imaglac", "imagmach", "imagmich", "imagmwmh", "imagewmh",
+             "admut", "ftldmut", "othmut", "othmutx"
            ),
 
-              default_response = c(rep(8,10), 0, "", rep(8, 6)),
+              default_response = c(rep(8,10), 0, "", rep(8,9), ""),
               uds_recode = c(8),
               uds_null = c("null"),
               uds_ver_col = c("form_ver_num" = "uds_version"),
               reduce_collapse_string = NA
          ),
+
+       UDS4_to_UDS3 =
+         list(
+             # Updated NACC item codes for new forms
+           quest_num = c(
+             # PET section
+             "6a1", "6a2", "6b", "6b1", "6b2", "6b3", "64b", "64b", "6d",
+             # MRI/PET details carried forward to keep merge_nacc_rows behavior coherent
+             "7a1", "7a2", "7a3", "7a3a", "7a3b", "7a3c", "7a3d", "7a3e", "7a3e1",
+             # UDS3 Genetics no longer used in 4
+             "8", "9", "10", "10a"
+           ),
+           quest_id = c(
+             # Map to REDCap fields; adapt as available in your REDCap project
+             "amylpet", "taupetad", "fdgpetdx", "fdgad", "fdgftld", "fdglbd", "fdgoth", "fdgothx", "hippatr",
+             "mr_ad", "mr_ftld", "mr_cvd", "imaglinf", "imaglac", "imagmach", "imagmich", "imagmwmh", "imagewmh"
+           ),
+
+             default_response = c(rep(8,6), 0, "", rep(8, 10)),
+             uds_recode = c(8),
+             uds_null = c("null"),
+            uds_ver_col = c("form_ver_num" = "uds_version"),
+            reduce_collapse_string = NA
+
+         ),
+
        UDS4 =
          list(
            # Updated NACC item codes for new forms
            quest_num = c(
+             "5",
              # PET section
-             "6a1", "6a2", "6b", "6b1", "6b2", "6b3", "64b", "6d",
-             # MRI/PET details carried forward to keep merge_nacc_rows behavior coherent
-             "7a1", "7a2", "7a3", "7a3a", "7a3b", "7a3c", "7a3d", "7a3e", "7a3e1"
+             "6a", "6a1", "6a2", "6b", "6b1", "6b2", "6b3", "6b4", "6b4a",
+             "6c", "6d", "6d1", "6d2", "6d3", "6d4",
+             #Special hippocampal atrophy variable, probably drop for UDS4
+             "6d_old",
+             # MRI details carried forward to keep merge_nacc_rows behavior coherent
+             "7a", "7a1", "7a2", "7a3", "7a3a", "7a3b", "7a3c", "7a3d", "7a3e", "7a3e1"
            ),
            quest_id = c(
+             "imagindx",
              # Map to REDCap fields; adapt as available in your REDCap project
-             "amylpet", "taupetad", "fdgad", "fdgad_ad", "fdgftld", "fdgdlb", "fdgothx", "hippatr",
-             "mr_ad", "mr_ftld", "mr_cvd", "imaglinf", "imaglac", "imagmach", "imagmich", "imagmwmh", "imagewmh"
+             "petdx", "amylpet", "taupet", "fdgpetdx", "fdgad", "fdgftld", "fdglbd", "fdgoth", "fdgothx",
+             "datscandx", "tracothdx", "tracothdxx", "tracerad", "tracerftld", "tracerlbd", "traceroth", "tracerothx",
+             "hippatr",
+             # MRI column names
+             "structdx", "structad", "structftld", "structcvd", "imaglinf", "imaglac", "imagmach", "imagmich", "imagmwmh", "imagwmhsev"
            ),
-              default_response = c(rep(8,10), 0, "", rep(8, 6)),
+              default_response = c(0, 0, rep(8,2), 0, rep(8,4), "", 0, 0, "", rep(8,4), "",
+                                   8,
+                                   0, rep(8,3), rep(8,5), ""),
               uds_recode = c(8),
               uds_null = c("null"),
               uds_ver_col = c("form_ver_num" = "uds_version"),
