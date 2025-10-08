@@ -25,7 +25,7 @@ process_csv <- function(.data_list, entry_form, dict = processing_table_dict){
     }
 
     # Force new-form processing to UDS4
-    header_curr$uds_version <- "UDS3"
+    header_curr$uds_version <- "UDS4"
 
     #Next step through the tables and extract the relevant columns
     table_processed <- lapply(.mim$tables, function(.table){

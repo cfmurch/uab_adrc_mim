@@ -49,6 +49,10 @@ redcap_call <- function(rerun, .dict = redcap_dict){
     #Also recast form_ver_num to have a V annotation
     .dat$form_ver_num <- gsub("^(?<!V)([0-9\\.]*)$", "V\\1", .dat$form_ver_num, perl = TRUE)
 
+    ##
+    #Notes 20251008 - TEMPORARY STOP GAP - WE WILL REMOVE THIS TO HAVE uds_form_map DIFFER BASED ON THE FORM ITSELF
+    ##
+    .dat$formver <- "V4"
 
     #Our other indexing step is to reduce the REDCap data set since we expect single neuroimaging visits spread across multiple visits
     #This is actually fairly straightforward as we can get minimums according to each imaging set
@@ -267,16 +271,20 @@ uds_questions <-
 
          ),
 
+       ##
+       #To adjust 20251008 - We've identified a few questions Jon will need to adjust, specifically 6b4 and 6d_old, see below for where they are entered
+       ##
+
        UDS4 =
          list(
            # Updated NACC item codes for new forms
            quest_num = c(
              "5",
              # PET section
-             "6a", "6a1", "6a2", "6b", "6b1", "6b2", "6b3", "6b4", "6b4a",
-             "6c", "6d", "6d1", "6d2", "6d3", "6d4",
+             "6a", "6a1", "6a2", "6b", "6b1", "6b2", "6b3", "64b", "6b4a",    #"6b4", "6b4a",   #Replace this when Jon no longer has 64b
+             "6c", "6d", "6d1", "6d2", "6d3", "6d4", "6d4a",
              #Special hippocampal atrophy variable, probably drop for UDS4
-             "6d_old",
+             "6d", # "6d_old",  #Again, replace this once Jon annotates hippocampal atrophy as "6d_old"
              # MRI details carried forward to keep merge_nacc_rows behavior coherent
              "7a", "7a1", "7a2", "7a3", "7a3a", "7a3b", "7a3c", "7a3d", "7a3e", "7a3e1"
            ),
@@ -284,7 +292,7 @@ uds_questions <-
              "imagindx",
              # Map to REDCap fields; adapt as available in your REDCap project
              "petdx", "amylpet", "taupet", "fdgpetdx", "fdgad", "fdgftld", "fdglbd", "fdgoth", "fdgothx",
-             "datscandx", "tracothdx", "tracothdxx", "tracerad", "tracerftld", "tracerlbd", "traceroth", "tracerothx",
+             "datscandx", "tracothdx", "tracerad", "tracerftld", "tracerlbd", "traceroth", "tracerothx",
              "hippatr",
              # MRI column names
              "structdx", "structad", "structftld", "structcvd", "imaglinf", "imaglac", "imagmach", "imagmich", "imagmwmh", "imagwmhsev"
@@ -299,6 +307,9 @@ uds_questions <-
          )
   )
 
+##
+#Notes 20251008 - We will need to coerce uds_form_map to have both a UDS3 and UDS4 entry since the form version variable is form_ver_num in UDS3 and formver in UDS4
+##
 
 uds_form_map <- list(redcap_col = "form_ver_num",
                      map = data.frame(V3.1 = "UDS3", V4 = "UDS4")
