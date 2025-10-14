@@ -180,22 +180,10 @@ mim_to_redcap_dict <-
 
   ))
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+# Remove *_res_amyl and *_res_tau entries from mim_to_redcap_dict$Imaging
+# mim_to_redcap_dict$Imaging <- within(mim_to_redcap_dict$Imaging, {
+#   keep_idx <- !grepl("(_res_amyl|_res_tau)$", quest_id)
+#   quest_id <- quest_id[keep_idx]
+#   quest_num <- quest_num[keep_idx]
+# })
 

@@ -1,9 +1,10 @@
 library(targets)
 library(tarchetypes)
+library(dplyr)
 
 # Set target-specific options such as packages.
-tar_option_set(packages = c("ADRCDash", "naccDataDict"))
-#tar_option_set(packages = c("ADRCDash"))
+#tar_option_set(packages = c("ADRCDash", "naccDataDict"))
+tar_option_set(packages = c("ADRCDash"))
 
 
 #Source /R
@@ -76,7 +77,7 @@ targets <- list(
     uds_output,
     merge_to_csv(nacc_d1_merge, redcap_match[["nacc"]], csv_string = "redcap_D1_input_", .type = "nacc",
                  mim_dict = uds_questions, form_map = uds_form_map,
-                 .mim_backup = nacc_d1_single_row$UDS4)
+                 .mim_backup = nacc_d1_single_row)
   ),
 
 

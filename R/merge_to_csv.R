@@ -17,6 +17,7 @@ merge_to_csv <- function(.mim, .redcap, csv_string,
 
 
   #In preparation of UDS4, we want to iterate over our possible form versions
+
   uds_redcap_list <- lapply(form_map[["map"]], function(.form_ver){
 
     #First pull the appropriate entry from the MIM list (this goes first so we can get the IDs)
@@ -86,6 +87,8 @@ merge_to_csv <- function(.mim, .redcap, csv_string,
 
     #With the indexing complete, we can use the redcap_idx vector to subset the .redcap data and bind everything together
     .redcap <- .redcap[.mim$redcap_idx,]
+
+
     #We can just bind everything together by virtue of having ordered .mim based on the redcap_idx
     .redcap <- cbind.data.frame(.redcap[,colnames(.redcap) %in% remap_dict[[.type]]], .mim[,colnames(.mim) %in% mim_dict[[.form_ver]][["quest_id"]], with = FALSE])
 
@@ -95,12 +98,12 @@ merge_to_csv <- function(.mim, .redcap, csv_string,
 
   #With each form version processed, we can now bind out the data.frame
   redcap_out <- do.call(plyr::rbind.fill, uds_redcap_list)
-  
+
   # Ensure redcap_out is a proper data frame before proceeding
   if(is.null(redcap_out) || nrow(redcap_out) == 0) {
     return(data.frame())
   }
-  
+
   redcap_out[is.na(redcap_out)] <- ""
 
   #Final step is to remap column name like nacc_record back to the redcap expected output
@@ -111,6 +114,14 @@ merge_to_csv <- function(.mim, .redcap, csv_string,
     }
   }
 
+  # Apply imaging-specific cleanups
+  if("imagwmhsev" %in% colnames(redcap_out) && "imagmwmh" %in% colnames(redcap_out)){
+    # imagwmhsev only valid if imagmwmh == 1; otherwise blank
+    suppressWarnings({
+      invalid_idx <- which(as.character(redcap_out$imagmwmh) != "1" | is.na(redcap_out$imagmwmh))
+    })
+    if(length(invalid_idx) > 0) redcap_out$imagwmhsev[invalid_idx] <- ""
+  }
 
   #Write to file
   name_out <- paste0(csv_string, lubridate::today(), ".csv")
@@ -195,6 +206,7 @@ mim_redcap_row_match <- function(.mimdat, .by_id, .red,
   #Otherwise return the index where a match was found
   return(which(matched_vector == TRUE))
 }
+
 
 
 

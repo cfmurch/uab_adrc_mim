@@ -11,20 +11,61 @@ redcap_call <- function(rerun, .dict = redcap_dict){
   #Updated for the new ADRCDash
 
   #Read in the registry data
-  regist_curr <- ADRCDash:::registry_read_in(synth = FALSE, use_spinner = FALSE)
+  #regist_curr <- ADRCDash:::registry_read_in(synth = FALSE, use_spinner = FALSE)
+  dict <- ADRCDash:::redcap_dict
+
+  redcap_token <- Sys.getenv("REDCAP_API_NEW")
+  regist_curr <- REDCapR::redcap_read(redcap_uri = "https://redcap.dom.uab.edu/api/", token = redcap_token)$data
+  regist_curr <- data.table::as.data.table(regist_curr)
+  regist_curr$regist_key <- paste0("UAB", sprintf("%06d", as.numeric(regist_curr[[dict[["redcap_key"]]]])))
 
   #Read in NACC visits; also includes biomarker inventory
-  nacc_curr_list <-  ADRCDash:::visit_read_in(token = "REDCAP_NACC_API_NEW", subtable_dict = NULL, .type = "nacc", synth = FALSE)
-  nacc_curr <- nacc_curr_list[["visits"]]
-  rm(nacc_curr_list)
+  # nacc_curr_list <-  ADRCDash:::visit_read_in(token = "REDCAP_NACC_API_NEW", subtable_dict = NULL, .type = "nacc", synth = FALSE)
+  # nacc_curr <- nacc_curr_list[["visits"]]
+  # rm(nacc_curr_list)
+
+  # Get UDS4 token
+  token <- Sys.getenv("UDS4_API")
+
+  # Pull data
+  uds4_records_raw <- REDCapR::redcap_read(redcap_uri = "https://redcap.dom.uab.edu/api/", token = token)$data
+
+  # Read process similar to ADRCDash
+
+  visit_subj_data <- uds4_records_raw[uds4_records_raw[[dict[["event_col"]]]] == "dmsc_only_arm_1", ]
+
+  subj_data_cols_to_drop <- which(colSums(is.na(visit_subj_data)) == nrow(visit_subj_data))
+
+  subj_data_cols <- if (length(subj_data_cols_to_drop) > 0) {
+    colnames(visit_subj_data)[-subj_data_cols_to_drop]
+  } else {
+    colnames(visit_subj_data)
+  }
+
+  # Fill down rows
+  nacc_curr <- ADRCDash:::fill_down_rows(uds4_records_raw, dict = subj_data_cols, .type = "locf", fill_key = dict[["redcap_key"]])
+  # Similar to drop_invalid_rows() method
+  nacc_curr <- nacc_curr[!is.na(nacc_curr$frmdatea1), ]
+  # ordering the data
+  data.table::setorderv(nacc_curr, cols = c(dict[["adrc_key"]], dict[["visit_col"]]))
+  # Extracting dmsc_only_arm_1 rows
+  nacc_curr <- nacc_curr[nacc_curr$redcap_event_name == "dmsc_only_arm_1", ]
+
+  # Converting to numeric
+  nacc_curr <- convert_char_to_numeric(nacc_curr)
 
   #Read in Neuroimaging data
   neuroimage_curr_list <- ADRCDash:::visit_read_in(token = "REDCAP_NEUROIMAGE_API", .type = "neuroimage", synth = FALSE, all_cols = FALSE)
   neuroimage_curr <- neuroimage_curr_list[["visits"]]
   rm(neuroimage_curr_list)
 
+  # Stopper only for testing
+  # neuroimage_curr <- neuroimage_curr %>% filter(adc_sub_id == "ADC0001")
+  # nacc_curr       <- nacc_curr %>% filter(adc_sub_id == "ADC0001")
+  # regist_curr     <- regist_curr %>% filter(adc_sub_id == "ADC0001")
+
   #Step wise merging 1, add registry to neuroimage, remap record / visit column names
-  regist_curr[[.dict[["adrc_key"]]]] <- gsub("0(\\d{3})", "\\1", regist_curr[[.dict[["adrc_key"]]]])
+  #regist_curr[[.dict[["adrc_key"]]]] <- gsub("0(\\d{3})", "\\1", regist_curr[[.dict[["adrc_key"]]]])
   data_curr <- neuroimage_curr[regist_curr[regist_curr[[.dict[["adrc_key"]]]] %in% neuroimage_curr[[.dict[["adrc_key"]]]], ], on = eval(.dict[["adrc_key"]])]
   for(.idx in seq_along(.dict[["merge_remap"]][["image"]])){
     colnames(data_curr)[colnames(data_curr) == names(.dict[["merge_remap"]][["image"]])[.idx]] <- .dict[["merge_remap"]][["image"]][[.idx]]
@@ -76,7 +117,8 @@ redcap_call <- function(rerun, .dict = redcap_dict){
 
 #The uds match data function used to minimize duplicate imaging rows
 #Goal is to return a vector with a single TRUE corresponding to the UDS data most closely aligned to the imaging date
-uds_image_match <- function(.dat, .dict = redcap_dict, .uds_col = "a1_form_dt"){
+#uds_image_match <- function(.dat, .dict = redcap_dict, .uds_col = "a1_form_dt"){
+uds_image_match <- function(.dat, .dict = redcap_dict, .uds_col = "frmdatea1"){
 
   #Step through the image date columns to compare against the backup, coerce both dates to columns and take the difference in days (absolute value)
   uds_image_diff <- lapply(.dict[["uds_visit_match"]][["image_cols"]], function(.col){
@@ -143,7 +185,22 @@ uds_image_match <- function(.dat, .dict = redcap_dict, .uds_col = "a1_form_dt"){
 # }
 
 
-
+convert_char_to_numeric <- function(df) {
+  df[] <- lapply(df, function(x) {
+    if (is.character(x) || is.factor(x)) {
+      x_num <- suppressWarnings(as.numeric(as.character(x)))
+      # Convert if not all values became NA
+      if (!all(is.na(x_num)) && sum(!is.na(x_num)) > 0) {
+        return(x_num)
+      } else {
+        return(x)  # Keep original if numeric conversion fails
+      }
+    } else {
+      return(x)
+    }
+  })
+  return(df)
+}
 
 
 #'
@@ -161,7 +218,8 @@ uds_image_match <- function(.dat, .dict = redcap_dict, .uds_col = "a1_form_dt"){
 redcap_dict = list(retained = c("nacc_record", "image_record", "adc_sub_id",
                                 "nacc_event", "image_event",
                                 "nacc_visit", "image_visit",
-                                "form_ver_num", "abeta_visit_dt", "tau_visit_dt", "a1_form_dt"),
+                                "form_ver_num", "abeta_visit_dt", "tau_visit_dt", #"a1_form_dt"
+                                "frmdatea1"),
 
                    imaging_inst_exported = c(),
 
@@ -188,38 +246,6 @@ redcap_dict = list(retained = c("nacc_record", "image_record", "adc_sub_id",
 #  reduc_collapse_string is used for columns that get reduced
 #    It has no bearing for this dictionary but is important for things like STUDY INFORMATION in the Imaging dictionary to avoid mismatches in merge_nacc_rows
 
-# uds_questions <-
-#   list(
-#     UDS4 =
-#       list(
-#         # Updated NACC item codes for new forms
-#         quest_num = c(
-#           # PET section
-#           "6a1", "6a2", "6b", "6b1", "6b2", "6b3", "64b", "6d",
-#           # MRI/PET details carried forward to keep merge_nacc_rows behavior coherent
-#           "7a1", "7a2", "7a3", "7a3a", "7a3b", "7a3c", "7a3d", "7a3e", "7a3e1",
-#           # Legacy fields still present in new tables
-#           "6e", "6h"
-#         ),
-#         quest_id = c(
-#           # Map to REDCap fields; adapt as available in your REDCap project
-#           "amylpet", "taupetad", "fdgad", "fdgad_ad", "fdgftld", "fdgdlb", "fdgothx", "hippatr",
-#           "mr_ad", "mr_ftld", "mr_cvd", "imaglinf", "imaglac", "imagmach", "imagmich", "imagmwmh", "imagewmh",
-#           # Backward-compatible fields used elsewhere
-#           "taupetad", "tpetftld"
-#         ),
-#         default_response = rep(8, 20),
-#         uds_recode = c(8),
-#         uds_null = c("null"),
-#         uds_ver_col = c("form_ver_num" = "uds_version"),
-#         reduce_collapse_string = NA
-#       )
-#   )
-
-#
-# uds_form_map <- list(redcap_col = "form_ver_num",
-#                      map = data.frame(V4 = "UDS4"))
-
 uds_questions <-
   list(UDS3 =
          list(
@@ -233,7 +259,7 @@ uds_questions <-
              "8", "9", "10", "10a"
            ),
            quest_id = c(
-             # Map to REDCap fields; adapt as available in your REDCap project
+             # Map to REDCap fields; adapt as available in REDCap project
              "amylpet", "amylcsf", "fdgad", "hippatr", "taupetad", "csftau", "fdgftld", "tpetftld", "mrftld", "datscan", "othbiom", "othbiomx",
              "imaglinf", "imaglac", "imagmach", "imagmich", "imagmwmh", "imagewmh",
              "admut", "ftldmut", "othmut", "othmutx"
@@ -263,7 +289,9 @@ uds_questions <-
              "mr_ad", "mr_ftld", "mr_cvd", "imaglinf", "imaglac", "imagmach", "imagmich", "imagmwmh", "imagewmh"
            ),
 
-             default_response = c(rep(8,6), 0, "", rep(8, 10)),
+            # Defaults updated: fdgpetdx should default to 0 (not 8)
+            # Vector aligned to quest_id order above
+            default_response = c(8, 8, 0, 8, 8, 8, 0, "", 8, 8, 8, 8, 8, 8, 8, 8, 8, 8),
              uds_recode = c(8),
              uds_null = c("null"),
             uds_ver_col = c("form_ver_num" = "uds_version"),
@@ -284,22 +312,35 @@ uds_questions <-
              "6a", "6a1", "6a2", "6b", "6b1", "6b2", "6b3", "64b", "6b4a",    #"6b4", "6b4a",   #Replace this when Jon no longer has 64b
              "6c", "6d", "6d1", "6d2", "6d3", "6d4", "6d4a",
              #Special hippocampal atrophy variable, probably drop for UDS4
-             "6d", # "6d_old",  #Again, replace this once Jon annotates hippocampal atrophy as "6d_old"
+             #"6d", # "6d_old",  #Again, replace this once Jon annotates hippocampal atrophy as "6d_old"
              # MRI details carried forward to keep merge_nacc_rows behavior coherent
              "7a", "7a1", "7a2", "7a3", "7a3a", "7a3b", "7a3c", "7a3d", "7a3e", "7a3e1"
            ),
            quest_id = c(
-             "imagindx",
-             # Map to REDCap fields; adapt as available in your REDCap project
+             "imagingdx",
+             # Map to REDCap fields; adapt as available in REDCap project
              "petdx", "amylpet", "taupet", "fdgpetdx", "fdgad", "fdgftld", "fdglbd", "fdgoth", "fdgothx",
              "datscandx", "tracothdx", "tracerad", "tracerftld", "tracerlbd", "traceroth", "tracerothx",
-             "hippatr",
+
+             #"hippatr", # Suggested to remove from D1 form
+
              # MRI column names
              "structdx", "structad", "structftld", "structcvd", "imaglinf", "imaglac", "imagmach", "imagmich", "imagmwmh", "imagwmhsev"
            ),
-              default_response = c(0, 0, rep(8,2), 0, rep(8,4), "", 0, 0, "", rep(8,4), "",
-                                   8,
-                                   0, rep(8,3), rep(8,5), ""),
+             # Ensure fdgpetdx and structdx default to 0 (not 8)
+             default_response = c(
+               0,            # imagingdx
+               0,            # petdx
+               8, 8,         # amylpet, taupet (amyl/tau flags remain Unknown by default)
+               0,            # fdgpetdx; default No
+               8, 8, 8, 8,   # fdgad, fdgftld, fdglbd, fdgoth
+               "",           # fdgothx -> ""
+               0, 0, 8,     # datscandx, tracothdx, tracerad
+               8, 8, 8, "",   # tracerftld, tracerlbd, traceroth, tracerothx
+               0,            # structdx -> default No
+               8,8,8,8,8,8,8,8,   # structad, structftld, structcvd, imaglinf, imaglac, imagmach, imagmich, imagmwmh
+               ""             # imagwmhsev; conditionally defaults to blank
+             ),
               uds_recode = c(8),
               uds_null = c("null"),
               uds_ver_col = c("form_ver_num" = "uds_version"),
@@ -311,7 +352,11 @@ uds_questions <-
 #Notes 20251008 - We will need to coerce uds_form_map to have both a UDS3 and UDS4 entry since the form version variable is form_ver_num in UDS3 and formver in UDS4
 ##
 
-uds_form_map <- list(redcap_col = "form_ver_num",
+# uds_form_map <- list(redcap_col = "form_ver_num",
+#                      map = data.frame(V3.1 = "UDS3", V4 = "UDS4")
+# )
+
+uds_form_map <- list(redcap_col = "formver",
                      map = data.frame(V3.1 = "UDS3", V4 = "UDS4")
 )
 
