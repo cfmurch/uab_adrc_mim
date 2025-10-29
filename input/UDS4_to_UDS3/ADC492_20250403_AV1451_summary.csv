@@ -1,0 +1,61 @@
+"Subject ID: 300002780JMAV1451ADC492X1","Subject ID#/MRN: 300002780JMAV1451ADC492X1","Analysis performed by: McConathy","Date analysis performed: 20250416",""
+"null","6 Ph PET BRAIN MAC TOF REG_80-100min_frames_2-5 - 20250403","null","300002780JMAV1451ADC492X1 - 20250403",""
+"IMAGING RESULT/PARAMETER","RESULT
+","NACC ITEM ID
+","CONFIDENCE","STUDY INFORMATION"
+"Elevated amyloid on PET?","null","6a1","null","null"
+"Centiloid value (CL)","null","","SUVR for CL calculation","null"
+"Centiloid equation","null","","Amyloid SUVR = (entire cerebral cortex activity)/
+(entire cerebellar activity) ","null"
+"Elevated tau on PET?","No","6a2","Highly confident","6 Ph PET BRAIN MAC TOF REG_80-100min_frames_2-5 - 20250403"
+"Tauopathy summary score 
+- entorhinal
+- lateral occipital
+- inferior temporal cortex
+- amygdala","Taupathy summary score: 1.2","","",""
+"Abnormal FDG PET?","null","6b","null","null"
+"FDG consistent with AD?","null","6b1","","null"
+"FDG consistent with FTLD?","null","6b2","","null"
+"FDG consistent with DLB?","null","6b3","","null"
+"FDG consistent with other etiology?","null","64b","","null"
+"FDG other etiology (if applicable):","null","64b","","null"
+"=====================","=====================","=====================","=====================","====================="
+"Subject ID: 300002780JMAV1451ADC492X1","Subject ID#/MRN: 300002780JMAV1451ADC492X1","Analysis performed by: McConathy","Date analysis performed: 20250416",""
+"null","6 Ph PET BRAIN MAC TOF REG_80-100min_frames_2-5 - 20250403","null","300002780JMAV1451ADC492X1 - 20250403",""
+"IMAGING RESULT/PARAMETER","RESULT
+","NACC ITEM ID
+","CONFIDENCE","STUDY INFORMATION"
+"Atrophy on MR consistent with AD?","null","7a1","null","300002780JMAV1451ADC492X1 - 20250403"
+"Atrophy on MR consistent with FTLD?","null","7a2","null","300002780JMAV1451ADC492X1 - 20250403"
+"Hippocampal atrophy (Duara 2-4 on right and/or left)?","null","6d","Not applicable","300002780JMAV1451ADC492X1 - 20250403"
+"Right hippocampal atrophy (Duara 2-4)?","NA","Not applicable","Not applicable","300002780JMAV1451ADC492X1 - 20250403"
+"Right hippocampal atrophy Duara score (0-4)
+","null","Not applicable
+","Not applicable","300002780JMAV1451ADC492X1 - 20250403"
+"Left hippocampal atrophy (Duara 2-4)?","NA","Not applicable","Not applicable","300002780JMAV1451ADC492X1 - 20250403"
+"Left hippocampal atrophy Duara score (0-4)","null","Not applicable","Not applicable","300002780JMAV1451ADC492X1 - 20250403"
+"=====================","=====================","=====================","=====================","====================="
+"=======================","=======================","=======================","",""
+"Subject ID: 300002780JMAV1451ADC492X1","Series name for volumes: SAG 3D FSPGR_20250403PIB","Date of acquisition: 2025-04-03","",""
+"REGION","Volume (mL)","Region volume as percent of entire brain","",""
+"Entire brain","929.1315","NA","",""
+"Entire cerebellum","127.2275","13.693164537088556","",""
+"Entire cerebral cortex","391.1411","42.09749922649379","",""
+"Left caudate","2.4015","0.2584671884330111","",""
+"Right caudate","2.460125","0.2647768426363194","",""
+"Left frontal cortex","71.89687","7.738073223941052","",""
+"Right frontal cortex","73.13575","7.871410257841974","",""
+"Left hippocampus","3.820375","0.41117700671488794","",""
+"Right hippocampus","3.9934375","0.4298032795924427","",""
+"Left lateral ventricle","6.8160625","0.7335950479015483","",""
+"Right lateral ventricle","5.7523127","0.6191064287070327","",""
+"Left occipital cortex","18.680813","2.010567228036201","",""
+"Right occipital cortex","17.780624","1.9136822902878494","",""
+"Left parietal cortex","46.84931","5.04226940482392","",""
+"Right parietal cortex","46.92","5.049877191518825","",""
+"Left putamen","3.6585","0.39375482107044063","",""
+"Right putamen","3.301625","0.3553453005227654","",""
+"Left temporal cortex","40.52125","4.361196773411619","",""
+"Right temporal cortex","40.936874","4.405929163253496","",""
+"","","","",""
+"Suggested file name for CSV summary report<BR>ADC###_YYYYMMDD_PETagent_summary","ADC492_20250403_AV1451_summary","","",""

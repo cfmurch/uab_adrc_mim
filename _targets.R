@@ -15,18 +15,50 @@ targets::tar_destroy("local")
 # Define targets
 targets <- list(
 
+
+
+
+
+
+
+
+
+
   #Pre-processing - read in all files in the input directory
   tar_target(
-    input_dir,
-    paste0("./input/", list.files("./input/")),
+    input_dirs,
+    {
+      .dirs <- c(
+        UDS3 = "./input/UDS3",
+        UDS4_to_UDS3 = "./input/UDS4_to_UDS3",
+        UDS4 = "./input/UDS4"
+      )
+
+      lapply(.dirs, function(.dir){
+        list.files(.dir, full.names = TRUE)
+      })
+    },
     format = "file"
   ),
 
   #Pre-processing - build out the list of read-in data
   tar_target(
     data_list,
-    parse_csv(input_dir)
+    parse_csv(input_dirs)
   ),
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   #Now data_list has one entry for each file that's been read in from the directory
   #Within each entry is a set of header information and meta data ($header)
@@ -35,15 +67,26 @@ targets <- list(
   #REDCap uploads - starting dataframe
 
   #First make a call to REDCap to get prospective dates, we can do this using our usual ADRCDash and naccDataDict calls
+  #We have one call for UDS3 and another for UDS4
   tar_target(
     sys_curr,
     Sys.time()
   ),
   tar_target(
-    redcap_match,
-    redcap_call(rerun = sys_curr)
+    redcap_match_uds3,
+    redcap_call(rerun = sys_curr, .api = "UDS3")
+  ),
+  tar_target(
+    redcap_match_uds4,
+    redcap_call(rerun = sys_curr, .api = "UDS4")
   ),
   #This creates a starting dataframe we can use to populate for the D1 and the imaging instrument
+
+
+
+
+
+
 
 
 

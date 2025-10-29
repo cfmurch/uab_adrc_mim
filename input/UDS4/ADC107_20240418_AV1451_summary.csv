@@ -1,0 +1,61 @@
+"Subject ID: 300002780JMAV1451ADC107x1","Subject ID#/MRN: 300002780JMAV1451ADC107x1","Analysis performed by: McConathy","Date analysis performed: 20250416",""
+"null","6 Ph PET BRAIN MAC TOF REG_81-101min_frames_2-5 - 20240418","null","300002780JMAV1451ADC107x1 - 20240418",""
+"IMAGING RESULT/PARAMETER","RESULT
+","NACC ITEM ID
+","CONFIDENCE","STUDY INFORMATION"
+"Elevated amyloid on PET?","null","6a1","null","null"
+"Centiloid value (CL)","null","","SUVR for CL calculation","null"
+"Centiloid equation","null","","Amyloid SUVR = (entire cerebral cortex activity)/
+(entire cerebellar activity) ","null"
+"Elevated tau on PET?","Yes","6a2","Highly confident","6 Ph PET BRAIN MAC TOF REG_81-101min_frames_2-5 - 20240418"
+"Tauopathy summary score 
+- entorhinal
+- lateral occipital
+- inferior temporal cortex
+- amygdala","Taupathy summary score: 2.21","","",""
+"Abnormal FDG PET?","null","6b","null","null"
+"FDG consistent with AD?","null","6b1","","null"
+"FDG consistent with FTLD?","null","6b2","","null"
+"FDG consistent with DLB?","null","6b3","","null"
+"FDG consistent with other etiology?","null","64b","","null"
+"FDG other etiology (if applicable):","null","64b","","null"
+"=====================","=====================","=====================","=====================","====================="
+"Subject ID: 300002780JMAV1451ADC107x1","Subject ID#/MRN: 300002780JMAV1451ADC107x1","Analysis performed by: McConathy","Date analysis performed: 20250416",""
+"null","6 Ph PET BRAIN MAC TOF REG_81-101min_frames_2-5 - 20240418","null","300002780JMAV1451ADC107x1 - 20240418",""
+"IMAGING RESULT/PARAMETER","RESULT
+","NACC ITEM ID
+","CONFIDENCE","STUDY INFORMATION"
+"Atrophy on MR consistent with AD?","null","7a1","null","300002780JMAV1451ADC107x1 - 20240418"
+"Atrophy on MR consistent with FTLD?","null","7a2","null","300002780JMAV1451ADC107x1 - 20240418"
+"Hippocampal atrophy (Duara 2-4 on right and/or left)?","null","6d","Not applicable","300002780JMAV1451ADC107x1 - 20240418"
+"Right hippocampal atrophy (Duara 2-4)?","NA","Not applicable","Not applicable","300002780JMAV1451ADC107x1 - 20240418"
+"Right hippocampal atrophy Duara score (0-4)
+","null","Not applicable
+","Not applicable","300002780JMAV1451ADC107x1 - 20240418"
+"Left hippocampal atrophy (Duara 2-4)?","NA","Not applicable","Not applicable","300002780JMAV1451ADC107x1 - 20240418"
+"Left hippocampal atrophy Duara score (0-4)","null","Not applicable","Not applicable","300002780JMAV1451ADC107x1 - 20240418"
+"=====================","=====================","=====================","=====================","====================="
+"=======================","=======================","=======================","",""
+"Subject ID: 300002780JMAV1451ADC107x1","Series name for volumes: Sag T1 BRAVO Brain Regional","Date of acquisition: 2024-04-18","",""
+"REGION","Volume (mL)","Region volume as percent of entire brain","",""
+"Entire brain","1039.4706","NA","",""
+"Entire cerebellum","138.77782","13.350817166143514","",""
+"Entire cerebral cortex","408.2918","39.27882294347979","",""
+"Left caudate","4.0988846","0.39432425094326795","",""
+"Right caudate","4.3753047","0.42091664532773376","",""
+"Left frontal cortex","73.958435","7.115009929723325","",""
+"Right frontal cortex","74.699234","7.186276876926743","",""
+"Left hippocampus","3.7196107","0.35783703347299106","",""
+"Right hippocampus","3.9918","0.3840224189662707","",""
+"Left lateral ventricle","19.064302","1.8340396343987555","",""
+"Right lateral ventricle","23.628227","2.2731020641211988","",""
+"Left occipital cortex","17.223755","1.6569737707570913","",""
+"Right occipital cortex","20.902323","2.0108623707230584","",""
+"Left parietal cortex","48.662018","4.681423285004492","",""
+"Right parietal cortex","50.20378","4.829745260995359","",""
+"Left putamen","4.27289","0.411064071347449","",""
+"Right putamen","4.1787724","0.4020096889373687","",""
+"Left temporal cortex","42.50402","4.089006602552593","",""
+"Right temporal cortex","42.269577","4.066452461163338","",""
+"","","","",""
+"Suggested file name for CSV summary report<BR>ADC###_YYYYMMDD_PETagent_summary","ADC107_20240418_AV1451_summary","","",""

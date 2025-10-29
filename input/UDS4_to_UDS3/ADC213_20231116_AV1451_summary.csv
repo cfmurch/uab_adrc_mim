@@ -1,0 +1,61 @@
+"Subject ID: 300002780JMAV1451213X1","Subject ID#/MRN: 300002780JMAV1451213X1","Analysis performed by: McConathy","Date analysis performed: 20250417",""
+"null","6 Ph PET BRAIN MAC TOF REG_80-100min_frames_2-5 - 20231116","null","300002780JMAV1451213X1 - 20231116",""
+"IMAGING RESULT/PARAMETER","RESULT
+","NACC ITEM ID
+","CONFIDENCE","STUDY INFORMATION"
+"Elevated amyloid on PET?","null","6a1","null","null"
+"Centiloid value (CL)","null","","SUVR for CL calculation","null"
+"Centiloid equation","null","","Amyloid SUVR = (entire cerebral cortex activity)/
+(entire cerebellar activity) ","null"
+"Elevated tau on PET?","No","6a2","Highly confident","6 Ph PET BRAIN MAC TOF REG_80-100min_frames_2-5 - 20231116"
+"Tauopathy summary score 
+- entorhinal
+- lateral occipital
+- inferior temporal cortex
+- amygdala","Taupathy summary score: 1.09","","",""
+"Abnormal FDG PET?","null","6b","null","null"
+"FDG consistent with AD?","null","6b1","","null"
+"FDG consistent with FTLD?","null","6b2","","null"
+"FDG consistent with DLB?","null","6b3","","null"
+"FDG consistent with other etiology?","null","64b","","null"
+"FDG other etiology (if applicable):","null","64b","","null"
+"=====================","=====================","=====================","=====================","====================="
+"Subject ID: 300002780JMAV1451213X1","Subject ID#/MRN: 300002780JMAV1451213X1","Analysis performed by: McConathy","Date analysis performed: 20250417",""
+"null","6 Ph PET BRAIN MAC TOF REG_80-100min_frames_2-5 - 20231116","null","300002780JMAV1451213X1 - 20231116",""
+"IMAGING RESULT/PARAMETER","RESULT
+","NACC ITEM ID
+","CONFIDENCE","STUDY INFORMATION"
+"Atrophy on MR consistent with AD?","null","7a1","null","300002780JMAV1451213X1 - 20231116"
+"Atrophy on MR consistent with FTLD?","null","7a2","null","300002780JMAV1451213X1 - 20231116"
+"Hippocampal atrophy (Duara 2-4 on right and/or left)?","null","6d","Not applicable","300002780JMAV1451213X1 - 20231116"
+"Right hippocampal atrophy (Duara 2-4)?","NA","Not applicable","Not applicable","300002780JMAV1451213X1 - 20231116"
+"Right hippocampal atrophy Duara score (0-4)
+","null","Not applicable
+","Not applicable","300002780JMAV1451213X1 - 20231116"
+"Left hippocampal atrophy (Duara 2-4)?","NA","Not applicable","Not applicable","300002780JMAV1451213X1 - 20231116"
+"Left hippocampal atrophy Duara score (0-4)","null","Not applicable","Not applicable","300002780JMAV1451213X1 - 20231116"
+"=====================","=====================","=====================","=====================","====================="
+"=======================","=======================","=======================","",""
+"Subject ID: 300002780JMAV1451213X1","Series name for volumes: Sag T1 BRAVO Brain Regional","Date of acquisition: 2023-11-16","",""
+"REGION","Volume (mL)","Region volume as percent of entire brain","",""
+"Entire brain","null","NA","",""
+"Entire cerebellum","null","null","",""
+"Entire cerebral cortex","null","null","",""
+"Left caudate","null","null","",""
+"Right caudate","null","null","",""
+"Left frontal cortex","null","null","",""
+"Right frontal cortex","null","null","",""
+"Left hippocampus","null","null","",""
+"Right hippocampus","null","null","",""
+"Left lateral ventricle","null","null","",""
+"Right lateral ventricle","null","null","",""
+"Left occipital cortex","null","null","",""
+"Right occipital cortex","null","null","",""
+"Left parietal cortex","null","null","",""
+"Right parietal cortex","null","null","",""
+"Left putamen","null","null","",""
+"Right putamen","null","null","",""
+"Left temporal cortex","null","null","",""
+"Right temporal cortex","null","null","",""
+"","","","",""
+"Suggested file name for CSV summary report<BR>ADC###_YYYYMMDD_PETagent_summary","ADC213_20231116_AV1451_summary","","",""
