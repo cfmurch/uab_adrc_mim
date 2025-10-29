@@ -1,0 +1,61 @@
+"Subject ID: 300001005JMPIB199x1","Subject ID#/MRN: 300001005JMPIB199x1","Analysis performed by: McConathy","Date analysis performed: 20250418",""
+"null","6 Ph PET BRAIN MAC TOF REG_77-97min_frames_2-5 - 20221103","null","300001005JMPIB199x1 - 20221103",""
+"IMAGING RESULT/PARAMETER","RESULT
+","NACC ITEM ID
+","CONFIDENCE","STUDY INFORMATION"
+"Elevated amyloid on PET?","null","6a1","null","null"
+"Centiloid value (CL)","null","","SUVR for CL calculation","null"
+"Centiloid equation","null","","Amyloid SUVR = (entire cerebral cortex activity)/
+(entire cerebellar activity) ","null"
+"Elevated tau on PET?","Yes","6a2","Highly confident","6 Ph PET BRAIN MAC TOF REG_77-97min_frames_2-5 - 20221103"
+"Tauopathy summary score 
+- entorhinal
+- lateral occipital
+- inferior temporal cortex
+- amygdala","Taupathy summary score: 1.69","","",""
+"Abnormal FDG PET?","null","6b","null","null"
+"FDG consistent with AD?","null","6b1","","null"
+"FDG consistent with FTLD?","null","6b2","","null"
+"FDG consistent with DLB?","null","6b3","","null"
+"FDG consistent with other etiology?","null","64b","","null"
+"FDG other etiology (if applicable):","null","64b","","null"
+"=====================","=====================","=====================","=====================","====================="
+"Subject ID: 300001005JMPIB199x1","Subject ID#/MRN: 300001005JMPIB199x1","Analysis performed by: McConathy","Date analysis performed: 20250418",""
+"null","6 Ph PET BRAIN MAC TOF REG_77-97min_frames_2-5 - 20221103","null","300001005JMPIB199x1 - 20221103",""
+"IMAGING RESULT/PARAMETER","RESULT
+","NACC ITEM ID
+","CONFIDENCE","STUDY INFORMATION"
+"Atrophy on MR consistent with AD?","null","7a1","null","300001005JMPIB199x1 - 20221103"
+"Atrophy on MR consistent with FTLD?","null","7a2","null","300001005JMPIB199x1 - 20221103"
+"Hippocampal atrophy (Duara 2-4 on right and/or left)?","null","6d","Not applicable","300001005JMPIB199x1 - 20221103"
+"Right hippocampal atrophy (Duara 2-4)?","NA","Not applicable","Not applicable","300001005JMPIB199x1 - 20221103"
+"Right hippocampal atrophy Duara score (0-4)
+","null","Not applicable
+","Not applicable","300001005JMPIB199x1 - 20221103"
+"Left hippocampal atrophy (Duara 2-4)?","NA","Not applicable","Not applicable","300001005JMPIB199x1 - 20221103"
+"Left hippocampal atrophy Duara score (0-4)","null","Not applicable","Not applicable","300001005JMPIB199x1 - 20221103"
+"=====================","=====================","=====================","=====================","====================="
+"=======================","=======================","=======================","",""
+"Subject ID: 300001005JMPIB199x1","Series name for volumes: Sag T1 BRAVO Brain REG","Date of acquisition: 2022-11-03","",""
+"REGION","Volume (mL)","Region volume as percent of entire brain","",""
+"Entire brain","878.38696","NA","",""
+"Entire cerebellum","118.85876","13.531480092543566","",""
+"Entire cerebral cortex","371.8847","42.33722952422167","",""
+"Left caudate","2.5999749","0.29599424633144356","",""
+"Right caudate","2.8148034","0.32045140476922057","",""
+"Left frontal cortex","69.50506","7.912806226067456","",""
+"Right frontal cortex","65.278046","7.43158179846815","",""
+"Left hippocampus","3.7734003","0.42958291346720684","",""
+"Right hippocampus","4.0651493","0.4627970904615032","",""
+"Left lateral ventricle","10.014801","1.1401354355754079","",""
+"Right lateral ventricle","9.907332","1.127900667804283","",""
+"Left occipital cortex","18.65992","2.124339331877473","",""
+"Right occipital cortex","19.38237","2.206586711092915","",""
+"Left parietal cortex","41.265926","4.697921087681527","",""
+"Right parietal cortex","43.22889","4.921394703203809","",""
+"Left putamen","3.260614","0.3712047259415493","",""
+"Right putamen","3.3472044","0.3810626282268023","",""
+"Left temporal cortex","41.868435","4.7665136978153475","",""
+"Right temporal cortex","38.876385","4.42588362276823","",""
+"","","","",""
+"Suggested file name for CSV summary report<BR>ADC###_YYYYMMDD_PETagent_summary","ADC199_20221103_AV1451_summary","","",""

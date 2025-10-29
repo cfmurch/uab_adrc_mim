@@ -27,11 +27,37 @@ getfunc<-function(x) {
 #Uses column names the the gsub extraction string (assumes any dataframe collapses using "|")
 #Lubridate calls are included and if !is.na() will use get() to coerce the string to a Date class
 
-parsing_dict <- list(file_name = list(col_names = c("adc_sub_id", "PET", "Image_date"),
-                                      gsub_string = c(".*?(ADC\\d*).*", ".*?(AV(\\d)+|PiB|Tau|Abeta).*", ".*?_(\\d*)_.*"),
-                                      date_string = c(NA, NA, "lubridate::ymd")),
+parsing_dict <- list(UDS3 =
+                       list(file_name =
+                              list(col_names = c("adc_sub_id", "PET", "Image_date"),
+                                   gsub_string = c(".*?(ADC\\d*).*", ".*?(AV(\\d)+|PiB|Tau|Abeta).*", ".*?_(\\d*)_.*"),
+                                   date_string = c(NA, NA, "lubridate::ymd")),
+                            header =
+                              list(col_names = c("adc_sub_id", "mim_neuro_id", "Image_visit", "uds_version", "MIM_date", "Analyzed_by",
+                                                 "Image_date", "Tau_date", "Amyloid_date", "MRI_date"),
+                                   gsub_string = c(".*?MRN: (ADC\\d*)_.*", ".*?Subject ID: (.*?)_.*", ".*?Subject ID: .*?((x|X)\\d*)_.*", ".*?(UDS\\d*)_.*",
+                                                   ".*?Date analysis performed: (\\d*)_.*",
+                                                   ".*?Analysis performed by: (.*?)_.*", ".*?Date of acquisition: (.*?)_.*",
+                                                   ".*?Date of tau.*?: (.*?)_.*", ".*?Date of amyloid.*?: (.*?)_.*", ".*?Date of MRI.*?: (.*?)_.*"),
+                                                   #"null.*?PET BRAIN MAC.*? \\- (.*?)_.*?null.*", ".*?PET BRAIN MAC.*? \\- (.*?)_.*?null.*?_.*?null.*", ".*?Date of MRI.*? \\- (.*?)"),
+                                   date_string = c(NA, NA, NA, NA, "lubridate::ymd", NA, "lubridate::ymd", "lubridate::ymd", "lubridate::ymd", "lubridate::ymd")),
 
-                     header = list(col_names = c("adc_sub_id", "mim_neuro_id", "Image_visit", "uds_version", "MIM_date", "Analyzed_by",
+                            tail =
+                              list(row_ident = "^(Amyloid SUVR|Tauopathy summary score|Centiloid value \\(CL\\)|SUVR for CL|Centiloid equation)",
+                                   col_names = c("amyl_suvr", "tau_score", "amyl_centiloid", "amyl_suvr_cl", "amyl_centiloid_eq"),
+                                   gsub_string = c(".*?cortical SUVR for amyloid: (.*?)_.*", ".*?Taupathy summary score: (.*?)_.*",
+                                                   "Centiloid value \\(CL\\)_(.*?)_.*", ".*?SUVR for CL calculation_(\\d+\\.\\d+)_.*", ".*? x SUVR\\) \\- (.*?)_.*"),
+                                   date_string = c(NA, NA, NA, NA, NA)),
+
+                            annotate = c("mim_neuro_id", "MIM_date", "Analyzed_by", "MRI_date")),
+
+                     UDS4_to_UDS3 =
+                       list(file_name =
+                              list(col_names = c("adc_sub_id", "PET", "Image_date"),
+                                   gsub_string = c(".*?(ADC\\d*).*", ".*?(AV(\\d)+|PiB|Tau|Abeta).*", ".*?_(\\d*)_.*"),
+                                   date_string = c(NA, NA, "lubridate::ymd")),
+                            header =
+                              list(col_names = c("adc_sub_id", "mim_neuro_id", "Image_visit", "uds_version", "MIM_date", "Analyzed_by",
                                                  "Image_date", "Tau_date", "Amyloid_date", "MRI_date"),
                                    gsub_string = c(".*?MRN: (ADC\\d*)_.*", ".*?Subject ID: (.*?)_.*", ".*?Subject ID: .*?((x|X)\\d*)_.*", ".*?(UDS\\d*)_.*",
                                                    ".*?Date analysis performed: (\\d*)_.*",
@@ -40,13 +66,38 @@ parsing_dict <- list(file_name = list(col_names = c("adc_sub_id", "PET", "Image_
                                                    "null.*?PET BRAIN MAC.*? \\- (.*?)_.*?null.*", ".*?PET BRAIN MAC.*? \\- (.*?)_.*?null.*?_.*?null.*", ".*?Date of MRI.*? \\- (.*?)"),
                                    date_string = c(NA, NA, NA, NA, "lubridate::ymd", NA, "lubridate::ymd", "lubridate::ymd", "lubridate::ymd", "lubridate::ymd")),
 
-                     tail = list(row_ident = "^(Amyloid SUVR|Tauopathy summary score|Centiloid value \\(CL\\)|SUVR for CL|Centiloid equation)",
-                                 col_names = c("amyl_suvr", "tau_score", "amyl_centiloid", "amyl_suvr_cl", "amyl_centiloid_eq"),
-                                 gsub_string = c(".*?cortical SUVR for amyloid: (.*?)_.*", ".*?Taupathy summary score: (.*?)_.*",
-                                                 "Centiloid value \\(CL\\)_(.*?)_.*", ".*?SUVR for CL calculation_(\\d+\\.\\d+)_.*", ".*? x SUVR\\) \\- (.*?)_.*"),
-                                 date_string = c(NA, NA, NA, NA, NA)),
+                            tail =
+                              list(row_ident = "^(Amyloid SUVR|Tauopathy summary score|Centiloid value \\(CL\\)|SUVR for CL|Centiloid equation)",
+                                   col_names = c("amyl_suvr", "tau_score", "amyl_centiloid", "amyl_suvr_cl", "amyl_centiloid_eq"),
+                                   gsub_string = c(".*?cortical SUVR for amyloid: (.*?)_.*", ".*?Taupathy summary score: (.*?)_.*",
+                                                   "Centiloid value \\(CL\\)_(.*?)_.*", ".*?SUVR for CL calculation_(\\d+\\.\\d+)_.*", ".*? x SUVR\\) \\- (.*?)_.*"),
+                                   date_string = c(NA, NA, NA, NA, NA)),
 
-                     annotate = c("mim_neuro_id", "MIM_date", "Analyzed_by", "MRI_date"))
+                            annotate = c("mim_neuro_id", "MIM_date", "Analyzed_by", "MRI_date")),
+
+                     UDS4 =
+                       list(file_name =
+                              list(col_names = c("adc_sub_id", "PET", "Image_date"),
+                                   gsub_string = c(".*?(ADC\\d*).*", ".*?(AV(\\d)+|PiB|Tau|Abeta).*", ".*?_(\\d*)_.*"),
+                                   date_string = c(NA, NA, "lubridate::ymd")),
+                            header =
+                              list(col_names = c("adc_sub_id", "mim_neuro_id", "Image_visit", "uds_version", "MIM_date", "Analyzed_by",
+                                                 "Image_date", "Tau_date", "Amyloid_date", "MRI_date"),
+                                   gsub_string = c(".*?MRN: (ADC\\d*)_.*", ".*?Subject ID: (.*?)_.*", ".*?Subject ID: .*?((x|X)\\d*)_.*", ".*?(UDS\\d*)_.*",
+                                                   ".*?Date analysis performed: (\\d*)_.*",
+                                                   ".*?Analysis performed by: (.*?)_.*", ".*?Date of acquisition: (.*?)_.*",
+                                                   #".*?Date of tau.*?: (.*?)_.*", ".*?Date of amyloid.*?: (.*?)_.*", ".*?Date of MRI.*?: (.*?)_.*"),
+                                                   "null.*?PET BRAIN MAC.*? \\- (.*?)_.*?null.*", ".*?PET BRAIN MAC.*? \\- (.*?)_.*?null.*?_.*?null.*", ".*?Date of MRI.*? \\- (.*?)"),
+                                   date_string = c(NA, NA, NA, NA, "lubridate::ymd", NA, "lubridate::ymd", "lubridate::ymd", "lubridate::ymd", "lubridate::ymd")),
+
+                            tail =
+                              list(row_ident = "^(Amyloid SUVR|Tauopathy summary score|Centiloid value \\(CL\\)|SUVR for CL|Centiloid equation)",
+                                   col_names = c("amyl_suvr", "tau_score", "amyl_centiloid", "amyl_suvr_cl", "amyl_centiloid_eq"),
+                                   gsub_string = c(".*?cortical SUVR for amyloid: (.*?)_.*", ".*?Taupathy summary score: (.*?)_.*",
+                                                   "Centiloid value \\(CL\\)_(.*?)_.*", ".*?SUVR for CL calculation_(\\d+\\.\\d+)_.*", ".*? x SUVR\\) \\- (.*?)_.*"),
+                                   date_string = c(NA, NA, NA, NA, NA)),
+
+                            annotate = c("mim_neuro_id", "MIM_date", "Analyzed_by", "MRI_date")))
 
 
 
@@ -61,10 +112,21 @@ parsing_dict <- list(file_name = list(col_names = c("adc_sub_id", "PET", "Image_
 
 #A variety of information related to the CSV parsing
 # key is the possible table names for PET data, Vascular data, Structural Volumes
-csv_list_dict <- list(key = c("PET", "Vascular", "Volumes"),
-                      PET_col = c("IMAGING RESULT/PARAMETER", "RESULT", "NACC ITEM ID", "CONFIDENCE", "STUDY INFORMATION"),
-                      Vascular_col = c("IMAGING PARAMETER", "RESULT", "NACC ITEM ID", "LOCATION", "STUDY INFORMATION"),
-                      Volumes_col = c("REGION", "Volume (mL)", "Region volume as percent of entire brain"))
+csv_list_dict <- list(UDS3 =
+                        list(key = c("PET", "Vascular", "Volumes"),
+                             PET_col = c("IMAGING RESULT/PARAMETER", "RESULT", "NACC ITEM ID", "CONFIDENCE", "STUDY INFORMATION"),
+                             Vascular_col = c("IMAGING PARAMETER", "RESULT", "NACC ITEM ID", "LOCATION", "STUDY INFORMATION"),
+                             Volumes_col = c("REGION", "Volume (mL)", "Region volume as percent of entire brain")),
+                      UDS4_to_UDS3 = list(key = c("PET", "Atrophy", "Vascular", "Volumes"),
+                                          PET_col = c("IMAGING RESULT/PARAMETER", "RESULT", "NACC ITEM ID", "CONFIDENCE", "STUDY INFORMATION"),
+                                          Atrophy_col = c("IMAGING RESULT/PARAMETER", "", "NACC", "CONFIDENCE", "STUDY INFORMATION"),
+                                          Vascular_col = c("IMAGING PARAMETER", "RESULT", "NACC ITEM ID", "LOCATION", "STUDY INFORMATION"),
+                                          Volumes_col = c("REGION", "Volume (mL)", "Region volume as percent of entire brain")),
+                      UDS4 = list(key = c("PET", "Atrophy", "Vascular", "Volumes"),
+                                  PET_col = c("IMAGING RESULT/PARAMETER", "RESULT", "NACC ITEM ID", "CONFIDENCE", "STUDY INFORMATION"),
+                                  Atrophy_col = c("IMAGING RESULT/PARAMETER", "", "NACC", "CONFIDENCE", "STUDY INFORMATION"),
+                                  Vascular_col = c("IMAGING PARAMETER", "RESULT", "NACC ITEM ID", "LOCATION", "STUDY INFORMATION"),
+                                  Volumes_col = c("REGION", "Volume (mL)", "Region volume as percent of entire brain")))
 
 
 

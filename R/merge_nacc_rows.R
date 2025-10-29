@@ -6,7 +6,7 @@
 
 
 
-merge_nacc_rows <- function(.data_orig, mim_dict, by_vector = c("adc_sub_id", "Image_visit"), force_latest = FALSE){
+merge_nacc_rows <- function(.data_orig, mim_dict, by_vector = c("adc_sub_id", "Image_visit"), force_latest = FALSE, enforce_max = FALSE){
 
   #See row_merge() for new argument force_latest which defaults to the most recent image scan if there's a mismatch on UDS questions
   ##For details, look under `if("Mismatch" %in% .compare_idx)` section
@@ -18,19 +18,20 @@ merge_nacc_rows <- function(.data_orig, mim_dict, by_vector = c("adc_sub_id", "I
     #Get the current dictionary
     mim_dict_curr <- mim_dict[[.form_ver]]
 
-    #Get the current nacc data based on uds version, return null if none exist
-    if(!is.na(mim_dict_curr[["uds_ver_col"]])){
-      .data <- .data_orig[.data_orig[[mim_dict_curr[["uds_ver_col"]]]] == .form_ver,]
-    } else{
-      .data <- .data_orig
-    }
+    # #Get the current nacc data based on uds version, return null if none exist
+    # if(!is.na(mim_dict_curr[["uds_ver_col"]])){
+    #   .data <- .data_orig[.data_orig[[mim_dict_curr[["uds_ver_col"]]]] == .form_ver,]
+    # } else{
+    #   .data <- .data_orig
+    # }
+    .data <- .data_orig[[.form_ver]]
     if(nrow(.data) == 0) return(NULL)
 
     #Coerce to data.table
     .data <- data.table::as.data.table(.data)
 
     #Step through according to the pairings of ADC ID and the Image Visit and call the row_merge internal function
-    .data_out <- .data[,row_merge(.SD, .BY, mim_dict = mim_dict_curr, .latest = force_latest), by = by_vector]
+    .data_out <- .data[,row_merge(.SD, .BY, mim_dict = mim_dict_curr, .latest = force_latest, .enforce_max = enforce_max), by = by_vector]
 
     #With the merge complete, we rename the question numbers to the expected REDCap names and return
     recode_vector <- mim_dict_curr[["quest_id"]]
@@ -48,16 +49,21 @@ merge_nacc_rows <- function(.data_orig, mim_dict, by_vector = c("adc_sub_id", "I
       .data_out[, (mim_dict_curr[["force_integer"]]) := lapply(.SD, as.integer), .SDcols = mim_dict_curr[["force_integer"]]]
     }
 
-    return(list(.form_ver, .data_out))
+    # return(list(.form_ver, .data_out))
+    return(.data_out)
   })
+
+  #We just name the list here since we rely on the list structure
+  names(uds_version_list) <- names(.data_orig)
 
 	#Drop any null columns, extract the names for indexing in the next step, create the final list to return
 	null_uds <- which(sapply(uds_version_list, is.null))
 	if(length(null_uds) > 0) uds_version_list <- uds_version_list[-null_uds]
-	uds_version_names <- do.call(c, lapply(uds_version_list, function(.list){.list[[1]]}))
-	uds_version_list <- lapply(uds_version_list, function(.list){.list[[2]]})
-	names(uds_version_list) <- uds_version_names
-	return(uds_version_list)
+	# uds_version_names <- do.call(c, lapply(uds_version_list, function(.list){.list[[1]]}))
+	# uds_version_list <- lapply(uds_version_list, function(.list){.list[[2]]})
+	# names(uds_version_list) <- uds_version_names
+
+  return(uds_version_list)
 
 
 }
@@ -75,8 +81,7 @@ merge_nacc_rows <- function(.data_orig, mim_dict, by_vector = c("adc_sub_id", "I
 #5/25/23 - New inclusion of .latest which forces any mismatched questions to the most recent scan
 #For details, look under `if("Mismatch" %in% .compare_idx)` section
 
-row_merge <- function(.dat, .id, mim_dict, .latest = FALSE){
-
+row_merge <- function(.dat, .id, mim_dict, .latest = FALSE, .enforce_max = FALSE){
 
   #If there's only one row, simply recast the null values and call it good
   #We can't use recode since it's doesn't play well across columns and it also requires exhaustive remap definitions
@@ -150,7 +155,7 @@ row_merge <- function(.dat, .id, mim_dict, .latest = FALSE){
 
       writeLines(paste0("\nMismatch found - UDS responses - check following entry - ", paste(.id, collapse = ": ")))
       print(.dat[, colnames(.dat) %in% colnames(.compare_idx)[.compare_idx == "Mismatch"],with = FALSE])
-      writeLines("Forcing values from latest row, change force_latest argument to FALSE to skip")
+      writeLines("Forcing values from latest row, change force_latest and enforce_max arguments to FALSE to skip")
 
       #First find the row with the most recent date
       #Pull the data columns based on the date_col_match dictionary
@@ -166,7 +171,20 @@ row_merge <- function(.dat, .id, mim_dict, .latest = FALSE){
       #Now that we know the index, we extract those mismatch values and fill in .compare_idx
       .compare_idx[,.compare_idx == "Mismatch"] <- .dat[.dat_date_idx, colnames(.dat) %in% colnames(.compare_idx)[.compare_idx == "Mismatch"],with = FALSE]
 
-    } else{
+    } else if(isTRUE(.enforce_max)){
+
+      writeLines(paste0("\nMismatch found - UDS responses - check following entry - ", paste(.id, collapse = ": ")))
+      print(.dat[, colnames(.dat) %in% colnames(.compare_idx)[.compare_idx == "Mismatch"],with = FALSE])
+      writeLines("Enforcing maximum values for all rows, change force_latest and enforce_max arguments to FALSE to skip")
+
+      #For the data where a mismatch is observed, simply pull the maximum value
+      .dat_date <- sapply(.dat_date, function(.col){
+        if(all(is.na(.col))) { return(NA)
+        } else if(length(unique(.col))==1) {return(unique(.col))
+        } else return(max(na.omit(.col[!(.col %in% mim_dict$uds_recode)])))
+      })
+
+    }else{
 
       #As an alternative, just print the warning and return NULL to prevent further processing
       writeLines(paste0("\nMismatch found - UDS responses - returning NULL - check following entry - ", paste(.id, collapse = ": ")))

@@ -1,0 +1,61 @@
+"Subject ID: 300002780JMAV1451210X1","Subject ID#/MRN: 300002780AV1451210X1","Analysis performed by: McConathy","Date analysis performed: 20250417",""
+"null","6 Ph PET BRAIN MAC TOF REG_81-101min_frames_2-5 - 20240220","null","300002780JMAV1451210X1 - 20240220",""
+"IMAGING RESULT/PARAMETER","RESULT
+","NACC ITEM ID
+","CONFIDENCE","STUDY INFORMATION"
+"Elevated amyloid on PET?","null","6a1","null","null"
+"Centiloid value (CL)","null","","SUVR for CL calculation","null"
+"Centiloid equation","null","","Amyloid SUVR = (entire cerebral cortex activity)/
+(entire cerebellar activity) ","null"
+"Elevated tau on PET?","No","6a2","Highly confident","6 Ph PET BRAIN MAC TOF REG_81-101min_frames_2-5 - 20240220"
+"Tauopathy summary score 
+- entorhinal
+- lateral occipital
+- inferior temporal cortex
+- amygdala","Taupathy summary score: 1.04","","",""
+"Abnormal FDG PET?","null","6b","null","null"
+"FDG consistent with AD?","null","6b1","","null"
+"FDG consistent with FTLD?","null","6b2","","null"
+"FDG consistent with DLB?","null","6b3","","null"
+"FDG consistent with other etiology?","null","64b","","null"
+"FDG other etiology (if applicable):","null","64b","","null"
+"=====================","=====================","=====================","=====================","====================="
+"Subject ID: 300002780JMAV1451210X1","Subject ID#/MRN: 300002780AV1451210X1","Analysis performed by: McConathy","Date analysis performed: 20250417",""
+"null","6 Ph PET BRAIN MAC TOF REG_81-101min_frames_2-5 - 20240220","null","300002780JMAV1451210X1 - 20240220",""
+"IMAGING RESULT/PARAMETER","RESULT
+","NACC ITEM ID
+","CONFIDENCE","STUDY INFORMATION"
+"Atrophy on MR consistent with AD?","null","7a1","null","300002780JMAV1451210X1 - 20240220"
+"Atrophy on MR consistent with FTLD?","null","7a2","null","300002780JMAV1451210X1 - 20240220"
+"Hippocampal atrophy (Duara 2-4 on right and/or left)?","null","6d","Not applicable","300002780JMAV1451210X1 - 20240220"
+"Right hippocampal atrophy (Duara 2-4)?","NA","Not applicable","Not applicable","300002780JMAV1451210X1 - 20240220"
+"Right hippocampal atrophy Duara score (0-4)
+","null","Not applicable
+","Not applicable","300002780JMAV1451210X1 - 20240220"
+"Left hippocampal atrophy (Duara 2-4)?","NA","Not applicable","Not applicable","300002780JMAV1451210X1 - 20240220"
+"Left hippocampal atrophy Duara score (0-4)","null","Not applicable","Not applicable","300002780JMAV1451210X1 - 20240220"
+"=====================","=====================","=====================","=====================","====================="
+"=======================","=======================","=======================","",""
+"Subject ID: 300002780JMAV1451210X1","Series name for volumes: Sag T1 BRAVO Brain Regional","Date of acquisition: 2024-02-20","",""
+"REGION","Volume (mL)","Region volume as percent of entire brain","",""
+"Entire brain","1062.3373","NA","",""
+"Entire cerebellum","138.40804","13.028633923370847","",""
+"Entire cerebral cortex","459.34128","43.23874221546108","",""
+"Left caudate","3.5859885","0.3375564981258044","",""
+"Right caudate","3.5714283","0.33618591432948086","",""
+"Left frontal cortex","80.31621","7.5603303562000015","",""
+"Right frontal cortex","83.249306","7.836428907368282","",""
+"Left hippocampus","4.3358555","0.4081430224205982","",""
+"Right hippocampus","4.6382637","0.43660933194387425","",""
+"Left lateral ventricle","7.6583905","0.7209001005812357","",""
+"Right lateral ventricle","6.064264","0.5708416651901078","",""
+"Left occipital cortex","22.595732","2.1269828476144155","",""
+"Right occipital cortex","24.021294","2.2611739309340457","",""
+"Left parietal cortex","53.196","5.007449153230843","",""
+"Right parietal cortex","55.204506","5.19651403989145","",""
+"Left putamen","4.3823924","0.4125236389459691","",""
+"Right putamen","4.369316","0.41129273934071015","",""
+"Left temporal cortex","50.20131","4.72555281042007","",""
+"Right temporal cortex","49.782696","4.6861478642122005","",""
+"","","","",""
+"Suggested file name for CSV summary report<BR>ADC###_YYYYMMDD_PETagent_summary","ADC210_20240220_AV1451_summary","","",""

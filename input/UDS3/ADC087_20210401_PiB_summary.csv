@@ -1,0 +1,63 @@
+"Patient ID: 300001005JMPIB087x1","Analysis performed by: McConathy","Date analysis performed: 20220408","",""
+"Date of amyloid PET study: 2021-04-01","null","null","Date of MRI study: 2021-04-01",""
+"IMAGING RESULT/PARAMETER","RESULT
+","NACC ITEM ID
+","CONFIDENCE","STUDY INFORMATION"
+"Abnormally elevated amyloid on PET?","No","6a","Highly confident","2021-04-01; Dynamic PET MAC TOF_50-70min_summed_frames_35-38"
+"FDG-PET pattern of AD?","null","6c","null","2021-04-01; Dynamic PET MAC TOF_50-70min_summed_frames_35-38"
+"Hippocampal atrophy (Duara 2-4 on right and/or left)?
+","No","6d","Not applicable
+","2021-04-01; Sag T1 BRAVO Brain REG"
+"Right hippocampal atrophy (Duara 2-4)?","No","Not applicable","Not applicable","2021-04-01; Sag T1 BRAVO Brain REG"
+"Right hippocampal atrophy Duara score (0-4)
+","1.0","Not applicable
+","Not applicable
+","2021-04-01; Sag T1 BRAVO Brain REG"
+"Left hippocampal atrophy (Duara 2-4)?","No","Not applicable","Not applicable","2021-04-01; Sag T1 BRAVO Brain REG"
+"Left hippocampal atrophy Duara score (0-4)","1.0","Not applicable","Not applicable","2021-04-01; Sag T1 BRAVO Brain REG"
+"Tau-PET evidence for AD?","null","6e","null","2021-04-01; Dynamic PET MAC TOF_50-70min_summed_frames_35-38"
+"FDG-PET evidence of FTLD?","null","6g","null","2021-04-01; Dynamic PET MAC TOF_50-70min_summed_frames_35-38"
+"Tau-PET evidence of FTLD?","null","6h","null","2021-04-01; Dynamic PET MAC TOF_50-70min_summed_frames_35-38"
+"Structural MRI evidence of FTLD?
+","No","6i","Highly confident","2021-04-01; Sag T1 BRAVO Brain REG"
+"FDG-PET results?","null","Not applicable","null","2021-04-01; Dynamic PET MAC TOF_50-70min_summed_frames_35-38"
+"Amyloid SUVR = (entire cerebral cortex activity)/(entire cerebellar activity) ","Mean cerebral cortical SUVR for amyloid: 0.98","","Tauopathy summary score (entorhinal, lateral occipital, inferior temporal cortex + amygdala)
+","null"
+"=====================","=====================","=====================","=====================","====================="
+"Patient ID: 300001005JMPIB087x1","Analysis performed by: McConathy","Date analysis performed: 20220408","",""
+"IMAGING PARAMETER	","RESULT","NACC ITEM ID","LOCATION","STUDY INFORMATION"
+"Large vessel infarct(s)?","No","7a","null","2021-04-01; Sag T2 FLAIR Cube Brain Regional"
+"Lacunar infarct(s)?","Yes","7b","left caudate","2021-04-01; Sag T2 FLAIR Cube Brain Regional"
+"Macrohemorrhage(s)?
+","No","7c","null","2021-04-01Ax SWAN Brain Regional"
+"Microhemorrage(s)?","No","7d","null","2021-04-01Ax SWAN Brain Regional"
+"Moderate white matter hyperintensities?
+(CHS 5-6)","No","7e","Not applicable","2021-04-01; Sag T2 FLAIR Cube Brain Regional"
+"Extensive white matter hyperintensities?
+(CHS 7 or 8)","No","7f","Not applicable","2021-04-01; Sag T2 FLAIR Cube Brain Regional"
+"CHS score (1-8)
+","1.0","Not applicable","Not applicable","2021-04-01; Sag T2 FLAIR Cube Brain Regional"
+"Fazekas score for periventricular white matter","1.0","Not applicable","Not applicable","2021-04-01; Sag T2 FLAIR Cube Brain Regional"
+"Fazekas score for deep white matter","1.0","Not applicable","Not applicable","2021-04-01; Sag T2 FLAIR Cube Brain Regional"
+"=======================","=======================","=======================","",""
+"Subject ID: 300001005JMPIB087x1","Series name for volumes: Sag T1 BRAVO Brain REG","Date of acquisition: 2021-04-01","",""
+"REGION","Volume (mL)","Region volume as percent of entire brain","",""
+"Entire brain","1298.9242","NA","",""
+"Entire cerebellum","148.63109","11.442629901340945","",""
+"Entire cerebral cortex","530.6686","40.85446875311008","",""
+"Left caudate","3.2686408","0.2516421490076345","",""
+"Right caudate","3.3315837","0.2564879269209599","",""
+"Left frontal cortex","92.48538","7.120152390983863","",""
+"Right frontal cortex","96.720116","7.446170922319938","",""
+"Left hippocampus","4.8602853","0.3741777467329249","",""
+"Right hippocampus","4.435405","0.3414675619152982","",""
+"Left lateral ventricle","12.201631","0.9393643328496285","",""
+"Right lateral ventricle","19.76759","1.5218432034209501","",""
+"Left occipital cortex","27.328503","2.1039336070724843","",""
+"Right occipital cortex","30.835835","2.373951816251937","",""
+"Left parietal cortex","60.044533","4.62263564245765","",""
+"Right parietal cortex","60.664696","4.670379996329219","",""
+"Left putamen","5.588794","0.4302633098825303","",""
+"Right putamen","5.5261445","0.4254401087179924","",""
+"Left temporal cortex","60.99243","4.69561133025217","",""
+"Right temporal cortex","59.395744","4.572687504223137","",""
