@@ -37,7 +37,7 @@ redcap_call <- function(rerun, .dict = redcap_dict, .api = NULL){
 
   # Read process for NACC is similar to ADRCDash but depends on UDS type
   #Here's UDS4 to filter on subject data
-  if("dmsc_only_arm_1" %in% nacc_curr$redcap_event_name){
+  if("dmsc_only_arm_1" %in% uds_records_raw[[dict[["event_col"]]]]){
     visit_subj_data <- uds_records_raw[uds_records_raw[[dict[["event_col"]]]] == "dmsc_only_arm_1", ]
   #Otherwise we get everything from UDS3
   } else{

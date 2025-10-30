@@ -12,7 +12,7 @@ process_csv <- function(.data_list, entry_form, dict = processing_table_dict){
 
     #We step through each entry in our processed list which corresponds to a participant specific MIM output
     dat_out <- lapply(.data_list[[.uds_set]], function(.mim){
-      print(.mim$header)
+
 
       #As the first sanity check, make sure all study dates (i.e. any date column that isn't MIM_date are the same)
       date_check <- .mim$header[,grep("(?<!MIM)_date", colnames(.mim$header), perl = TRUE,)]

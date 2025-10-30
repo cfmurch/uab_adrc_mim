@@ -18,6 +18,9 @@ parse_csv <- function(input_files, csv_table_split = "==", csv_dict_base = csv_l
       #Get the current parsing dictionary
       parsing_dict_curr <- parsing_dict[[.type]]
 
+      #Get the csv dictionary for this uds version
+      csv_dict <- csv_dict_base[[.type]]
+
       csv_out <-
         #Now iterate over the files
         lapply(.dir_curr, function(.csv){
@@ -73,7 +76,7 @@ parse_csv <- function(input_files, csv_table_split = "==", csv_dict_base = csv_l
             .tab <- as.data.frame(purrr::map_dfc(.tab, function(xx){gsub("\\\n|\\\t", "", xx)}))
 
             #Set the dictionary based on type
-            csv_dict <- csv_dict_base[[.type]]
+            #csv_dict <- csv_dict_base[[.type]]
 
             #We set up a while loop to pull header rows until a valid column name field is found in the first cell
             pulling_headers <- TRUE; header_out <- NULL
