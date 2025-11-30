@@ -178,11 +178,14 @@ row_merge <- function(.dat, .id, mim_dict, .latest = FALSE, .enforce_max = FALSE
       writeLines("Enforcing maximum values for all rows, change force_latest and enforce_max arguments to FALSE to skip")
 
       #For the data where a mismatch is observed, simply pull the maximum value
-      .dat_date <- sapply(.dat_date, function(.col){
+      .dat_max <- .dat[, colnames(.dat) %in% colnames(.compare_idx)[.compare_idx == "Mismatch"],with = FALSE]
+      .dat_max <- sapply(.dat_max, function(.col){
         if(all(is.na(.col))) { return(NA)
         } else if(length(unique(.col))==1) {return(unique(.col))
-        } else return(max(na.omit(.col[!(.col %in% mim_dict$uds_recode)])))
+        } else {return(max(na.omit(.col[!(.col %in% mim_dict$uds_recode)])))}
       })
+      #Fill in .compare_idx by matching on the column names
+      .compare_idx[,match(names(.dat_max), colnames(.compare_idx))] <- .dat_max
 
     }else{
 

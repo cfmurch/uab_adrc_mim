@@ -13,12 +13,12 @@ redcap_call <- function(rerun, .dict = redcap_dict, .api = NULL){
 
   #Read in the registry data
   #regist_curr <- ADRCDash:::registry_read_in(synth = FALSE, use_spinner = FALSE)
-  dict <- ADRCDash:::redcap_dict
+  #dict <- ADRCDash:::redcap_dict
 
   redcap_token <- Sys.getenv("REDCAP_API_NEW")
   regist_curr <- REDCapR::redcap_read(redcap_uri = "https://redcap.dom.uab.edu/api/", token = redcap_token)$data
   regist_curr <- data.table::as.data.table(regist_curr)
-  regist_curr$regist_key <- paste0("UAB", sprintf("%06d", as.numeric(regist_curr[[dict[["redcap_key"]]]])))
+  regist_curr$regist_key <- paste0("UAB", sprintf("%06d", as.numeric(regist_curr[[.dict[["redcap_key"]]]])))
   if(.api == "UDS3") regist_curr[[redcap_id]] <- gsub("ADC0(\\d+)", "ADC\\1", regist_curr[[redcap_id]])
 
   #Read in NACC visits; also includes biomarker inventory
@@ -37,11 +37,11 @@ redcap_call <- function(rerun, .dict = redcap_dict, .api = NULL){
 
   # Read process for NACC is similar to ADRCDash but depends on UDS type
   #Here's UDS4 to filter on subject data
-  if("dmsc_only_arm_1" %in% uds_records_raw[[dict[["event_col"]]]]){
-    visit_subj_data <- uds_records_raw[uds_records_raw[[dict[["event_col"]]]] == "dmsc_only_arm_1", ]
+  if("dmsc_only_arm_1" %in% uds_records_raw[[.dict[["event_col"]]]]){
+    visit_subj_data <- uds_records_raw[uds_records_raw[[.dict[["event_col"]]]] == "dmsc_only_arm_1", ]
   #Otherwise we get everything from UDS3
   } else{
-    visit_subj_data <- uds_records_raw[uds_records_raw[[dict[["event_col"]]]] == "subject_data_arm_1",]
+    visit_subj_data <- uds_records_raw[uds_records_raw[[.dict[["event_col"]]]] == "subject_data_arm_1",]
   }
 
   #Overall filtering process to drop all columns with nothing but NA is the same
@@ -56,11 +56,11 @@ redcap_call <- function(rerun, .dict = redcap_dict, .api = NULL){
 
 
   # Fill down rows
-  nacc_curr <- ADRCDash:::fill_down_rows(uds_records_raw, dict = subj_data_cols, .type = "locf", fill_key = dict[["redcap_key"]])
+  nacc_curr <- ADRCDash:::fill_down_rows(uds_records_raw, dict = subj_data_cols, .type = "locf", fill_key = .dict[["redcap_key"]])
   # Similar to drop_invalid_rows() method
   nacc_curr <- nacc_curr[!is.na(nacc_curr[[uds_form_map[["date_var"]][[.api]]]]), ]
   # ordering the data
-  data.table::setorderv(nacc_curr, cols = c(dict[["adrc_key"]], dict[["visit_col"]]))
+  data.table::setorderv(nacc_curr, cols = c(.dict[["adrc_key"]], .dict[["visit_col"]]))
   # Extracting dmsc_only_arm_1 rows for UDS4
   if("dmsc_only_arm_1" %in% nacc_curr$redcap_event_name) nacc_curr <- nacc_curr[nacc_curr$redcap_event_name == "dmsc_only_arm_1", ]
   if("visit_info_arm_1" %in% nacc_curr$redcap_event_name) nacc_curr <- nacc_curr[nacc_curr$redcap_event_name == "visit_info_arm_1", ]
@@ -236,7 +236,7 @@ redcap_dict = list(retained = c("nacc_record", "image_record", "adc_sub_id",
                    imaging_inst_exported = c(),
 
                    adrc_key = "adc_sub_id", redcap_key = "record_id",
-                   visit_col = "redcap_repeat_instance", image_col = "image_visit",
+                   event_col = "redcap_event_name", visit_col = "redcap_repeat_instance", image_col = "image_visit",
 
                    merge_remap = list(nacc = c(record_id = "nacc_record", redcap_repeat_instance = "nacc_visit", redcap_event_name = "nacc_event"),
                                       image = c(record_id = "image_record", redcap_repeat_instance = "image_visit", redcap_event_name = "image_event")),
